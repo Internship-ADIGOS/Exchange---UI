@@ -1,11 +1,25 @@
-import React from "react";
+import {React, useState, useEffect} from "react";
 import { Dropdown, Nav, Tab } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import AuthRight from "./AuthRight";
 
 
+const onLoad = () =>{
+    let refCode = window.location.search.replace("?ref=", "")
+    let elem = document.getElementById('ref_code')
+    let elem2 = document.getElementById('ref_code2')
+    elem.value = refCode
+    elem2.value = refCode
+}
+
 function Signup() {
+
+    useEffect(() => {
+        onLoad();
+      }, []);
+
     return (
+
         <>
             <div className="body d-flex p-0 p-xl-5">
                 <div className="container">
@@ -25,6 +39,10 @@ function Signup() {
                                                 <div className="card-body p-4">
                                                     <form>
                                                         <div className="mb-3">
+                                                            <label className="form-label fs-6">Name</label>
+                                                            <input type="name" className="form-control" />
+                                                        </div>
+                                                        <div className="mb-3">
                                                             <label className="form-label fs-6">Email address</label>
                                                             <input type="email" className="form-control" />
                                                         </div>
@@ -33,8 +51,12 @@ function Signup() {
                                                             <input type="password" className="form-control" />
                                                         </div>
                                                         <div className="mb-3">
+                                                            <label className="form-label fs-6">Confirm Password</label>
+                                                            <input type="password" className="form-control" />
+                                                        </div>
+                                                        <div className="mb-3">
                                                             <label className="form-label fs-6">Referral ID</label>
-                                                            <input type="text" className="form-control" />
+                                                            <input type="text" className="form-control" id="ref_code"/>
                                                         </div>
                                                         <button type="submit" className="btn btn-primary text-uppercase py-2 fs-5 w-100 mt-2">Create Account</button>
                                                     </form>
@@ -61,7 +83,7 @@ function Signup() {
                                                         </div>
                                                         <div className="mb-3">
                                                             <label className="form-label fs-6">Referral ID</label>
-                                                            <input type="text" className="form-control" />
+                                                            <input type="text" className="form-control" id="ref_code2"/>
                                                         </div>
                                                         <button type="submit" className="btn btn-primary text-uppercase py-2 fs-5 w-100 mt-2">Create Account</button>
                                                     </form>
@@ -70,7 +92,7 @@ function Signup() {
                                         </Tab.Pane>
                                     </Tab.Content>
                                 </Tab.Container>
-                                <Link to={process.env.PUBLIC_URL+"/sign-in"} title="#">Already registered? <span className="text-secondary text-decoration-underline">Log In</span></Link>
+                                <Link to={process.env.PUBLIC_URL+"/sign-in"} title="#"> Already registered? <span className="text-secondary text-decoration-underline">Log In</span></Link>
                             </div>
                         </div>
                         <AuthRight />
