@@ -1,4 +1,4 @@
-import {React, useState, useEffect} from "react";
+import {React, useEffect} from "react";
 import { Dropdown, Nav, Tab } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import AuthRight from "./AuthRight";
@@ -12,6 +12,33 @@ const onLoad = () =>{
     elem2.value = refCode
 }
 
+function validate_password() {
+ 
+    var pass = document.getElementById('pass').value;
+    var confirm_pass = document.getElementById('pass2').value;
+    if (pass !== confirm_pass) {
+        document.getElementById('wrong_pass_alert').style.color = 'red';
+        document.getElementById('wrong_pass_alert').innerHTML
+          = '☒ Use same password';
+        document.getElementById('create').disabled = true;
+        document.getElementById('create').style.opacity = (0.4);
+    } else {
+        document.getElementById('wrong_pass_alert').style.color = 'green';
+        document.getElementById('wrong_pass_alert').innerHTML =
+            '🗹 Password Matched';
+        document.getElementById('create').disabled = false;
+        document.getElementById('create').style.opacity = (1);
+    }
+}
+
+function wrong_pass_alert() {
+    if (document.getElementById('pass').value !== "" &&
+        document.getElementById('pass2').value !== "") {
+        alert("Your response is submitted");
+    } else {
+        alert("Please fill all the fields");
+    }
+}
 function Signup() {
 
     useEffect(() => {
@@ -19,7 +46,6 @@ function Signup() {
       }, []);
 
     return (
-
         <>
             <div className="body d-flex p-0 p-xl-5">
                 <div className="container">
@@ -48,17 +74,19 @@ function Signup() {
                                                         </div>
                                                         <div className="mb-3">
                                                             <label className="form-label fs-6">Password</label>
-                                                            <input type="password" className="form-control" />
+                                                            <input type="password" className="form-control" minLength={6} required id="pass1" />
                                                         </div>
                                                         <div className="mb-3">
                                                             <label className="form-label fs-6">Confirm Password</label>
-                                                            <input type="password" className="form-control" />
+                                                            <input type="password" className="form-control" id="pass2" minLength={6} required onkeyup = {validate_password}/>
                                                         </div>
+                                                        <span id="wrong_pass_alert"></span>
                                                         <div className="mb-3">
                                                             <label className="form-label fs-6">Referral ID</label>
                                                             <input type="text" className="form-control" id="ref_code"/>
                                                         </div>
-                                                        <button type="submit" className="btn btn-primary text-uppercase py-2 fs-5 w-100 mt-2">Create Account</button>
+                                                        <button type="submit" id="create" className="btn btn-primary text-uppercase py-2 fs-5 w-100 mt-2" 
+                                                        onClick={wrong_pass_alert}>Create Account</button>
                                                     </form>
                                                 </div>
                                             </div>
@@ -79,13 +107,18 @@ function Signup() {
                                                         </Dropdown>
                                                         <div className="mb-3">
                                                             <label className="form-label fs-6">Password</label>
-                                                            <input type="password" className="form-control" />
+                                                            <input type="password" className="form-control" id="pass1" />
                                                         </div>
+                                                        <div className="mb-3">
+                                                            <label className="form-label fs-6">Confirm Password</label>
+                                                            <input type="password" className="form-control" id="pass2" />
+                                                        </div>
+                                                        <span id="wrong_pass_alert"></span>
                                                         <div className="mb-3">
                                                             <label className="form-label fs-6">Referral ID</label>
                                                             <input type="text" className="form-control" id="ref_code2"/>
                                                         </div>
-                                                        <button type="submit" className="btn btn-primary text-uppercase py-2 fs-5 w-100 mt-2">Create Account</button>
+                                                        <button type="submit" className="btn btn-primary text-uppercase py-2 fs-5 w-100 mt-2" onClick="wrong_pass_alert()">Create Account</button>
                                                     </form>
                                                 </div>
                                             </div>
