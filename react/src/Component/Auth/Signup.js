@@ -1,49 +1,68 @@
-import {React, useEffect} from "react";
+import { React, useState, useEffect } from "react";
 import { Dropdown, Nav, Tab } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import AuthRight from "./AuthRight";
 
+// function validate_password() {
 
-const onLoad = () =>{
-    let refCode = window.location.search.replace("?ref=", "")
-    let elem = document.getElementById('ref_code')
-    let elem2 = document.getElementById('ref_code2')
-    elem.value = refCode
-    elem2.value = refCode
-}
+//     var pass = document.getElementById('pass').value;
+//     var confirm_pass = document.getElementById('pass2').value;
+//     if (pass !== confirm_pass) {
+//         document.getElementById('wrong_pass_alert').style.color = 'red';
+//         document.getElementById('wrong_pass_alert').innerHTML
+//             = '☒ Use same password';
+//         document.getElementById('create').disabled = true;
+//         document.getElementById('create').style.opacity = (0.4);
+//     } else {
+//         document.getElementById('wrong_pass_alert').style.color = 'green';
+//         document.getElementById('wrong_pass_alert').innerHTML =
+//             '🗹 Password Matched';
+//         document.getElementById('create').disabled = false;
+//         document.getElementById('create').style.opacity = (1);
+//     }
+// }
 
-function validate_password() {
- 
-    var pass = document.getElementById('pass').value;
-    var confirm_pass = document.getElementById('pass2').value;
-    if (pass !== confirm_pass) {
-        document.getElementById('wrong_pass_alert').style.color = 'red';
-        document.getElementById('wrong_pass_alert').innerHTML
-          = '☒ Use same password';
-        document.getElementById('create').disabled = true;
-        document.getElementById('create').style.opacity = (0.4);
-    } else {
-        document.getElementById('wrong_pass_alert').style.color = 'green';
-        document.getElementById('wrong_pass_alert').innerHTML =
-            '🗹 Password Matched';
-        document.getElementById('create').disabled = false;
-        document.getElementById('create').style.opacity = (1);
-    }
-}
+// function wrong_pass_alert() {
+//     if (document.getElementById('pass').value !== "" &&
+//         document.getElementById('pass2').value !== "") {
+//         alert("Your response is submitted");
+//     } else {
+//         alert("Please fill all the fields");
+//     }
+// }
 
-function wrong_pass_alert() {
-    if (document.getElementById('pass').value !== "" &&
-        document.getElementById('pass2').value !== "") {
-        alert("Your response is submitted");
-    } else {
-        alert("Please fill all the fields");
-    }
-}
 function Signup() {
+
+    const [isError, setError] = useState("")
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [conf_pass, setConf_pass] = useState("")
+    const [ref, setRef] = useState("")
+
 
     useEffect(() => {
         onLoad();
-      }, []);
+    }, []);
+
+    const checkValidation = (e) => {
+        const conf_pass = e.target.value
+        setConf_pass(conf_pass)
+        if (password != conf_pass) {
+            setError("Passwords are not matching")
+        } else {
+            setError("")
+        }
+    }
+
+    //on Load function 
+    const onLoad = () => {
+        let refCode = window.location.search.replace("?ref=", "")
+        let elem = document.getElementById('ref_code')
+        let elem2 = document.getElementById('ref_code2')
+        elem.value = refCode
+        elem2.value = refCode
+    }
 
     return (
         <>
@@ -66,27 +85,38 @@ function Signup() {
                                                     <form>
                                                         <div className="mb-3">
                                                             <label className="form-label fs-6">Name</label>
-                                                            <input type="name" className="form-control" />
+                                                            <input type="name" className="form-control"
+                                                              value={name}
+                                                                onChange={(e) => setName(e.target.value)}
+                                                            />
                                                         </div>
                                                         <div className="mb-3">
                                                             <label className="form-label fs-6">Email address</label>
-                                                            <input type="email" className="form-control" />
+                                                            <input type="email" className="form-control" value={email}
+                                                                onChange={(e) => setEmail(e.target.value)}
+                                                            />
                                                         </div>
                                                         <div className="mb-3">
                                                             <label className="form-label fs-6">Password</label>
-                                                            <input type="password" className="form-control" minLength={6} required id="pass1" />
+                                                            <input type="password" className="form-control" value={password} minLength={6} required id="pass1"
+                                                                onChange={(e) => setPassword(e.target.value)}
+                                                            />
                                                         </div>
                                                         <div className="mb-3">
                                                             <label className="form-label fs-6">Confirm Password</label>
-                                                            <input type="password" className="form-control" id="pass2" minLength={6} required onkeyup = {validate_password}/>
+                                                            <input type="password" className="form-control" id="pass2" minLength={6} required
+                                                               value={conf_pass} onChange={(e) => checkValidation(e)}
+                                                            />
                                                         </div>
-                                                        <span id="wrong_pass_alert"></span>
+                                                        <span id="wrong_pass">{isError}</span>
                                                         <div className="mb-3">
                                                             <label className="form-label fs-6">Referral ID</label>
-                                                            <input type="text" className="form-control" id="ref_code"/>
+                                                            <input type="text" className="form-control" id="ref_code" value={ref}
+                                                                onChange={(e) => setRef(e.target.value)}
+                                                            />
                                                         </div>
-                                                        <button type="submit" id="create" className="btn btn-primary text-uppercase py-2 fs-5 w-100 mt-2" 
-                                                        onClick={wrong_pass_alert}>Create Account</button>
+                                                        <button type="submit" id="create" className="btn btn-primary text-uppercase py-2 fs-5 w-100 mt-2"
+                                                        >Create Account</button>
                                                     </form>
                                                 </div>
                                             </div>
@@ -116,7 +146,7 @@ function Signup() {
                                                         <span id="wrong_pass_alert"></span>
                                                         <div className="mb-3">
                                                             <label className="form-label fs-6">Referral ID</label>
-                                                            <input type="text" className="form-control" id="ref_code2"/>
+                                                            <input type="text" className="form-control" id="ref_code2" />
                                                         </div>
                                                         <button type="submit" className="btn btn-primary text-uppercase py-2 fs-5 w-100 mt-2" onClick="wrong_pass_alert()">Create Account</button>
                                                     </form>
@@ -125,13 +155,13 @@ function Signup() {
                                         </Tab.Pane>
                                     </Tab.Content>
                                 </Tab.Container>
-                                <Link to={process.env.PUBLIC_URL+"/sign-in"} title="#"> Already registered? <span className="text-secondary text-decoration-underline">Log In</span></Link>
+                                <Link to={process.env.PUBLIC_URL + "/sign-in"} title="#"> Already registered? <span className="text-secondary text-decoration-underline">Log In</span></Link>
                             </div>
                         </div>
                         <AuthRight />
                     </div>
                 </div>
-            </div>   
+            </div>
         </>
     )
 }
