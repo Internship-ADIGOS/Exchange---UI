@@ -40,11 +40,6 @@ function Signup() {
     const [conf_pass, setConf_pass] = useState("")
     const [ref, setRef] = useState("")
 
-
-    useEffect(() => {
-        onLoad();
-    }, []);
-
     const checkValidation = (e) => {
         const conf_pass = e.target.value
         setConf_pass(conf_pass)
@@ -63,6 +58,10 @@ function Signup() {
         elem.value = refCode
         elem2.value = refCode
     }
+
+    useEffect(() => {
+        onLoad();
+    }, []);
 
     return (
         <>
@@ -137,18 +136,24 @@ function Signup() {
                                                         </Dropdown>
                                                         <div className="mb-3">
                                                             <label className="form-label fs-6">Password</label>
-                                                            <input type="password" className="form-control" id="pass1" />
+                                                            <input type="password" className="form-control" value={password} minLength={6} required id="pass1"
+                                                                onChange={(e) => setPassword(e.target.value)}
+                                                            />
                                                         </div>
                                                         <div className="mb-3">
                                                             <label className="form-label fs-6">Confirm Password</label>
-                                                            <input type="password" className="form-control" id="pass2" />
+                                                            <input type="password" className="form-control" id="pass2" minLength={6} required
+                                                               value={conf_pass} onChange={(e) => checkValidation(e)}
+                                                            />
                                                         </div>
-                                                        <span id="wrong_pass_alert"></span>
+                                                        <span id="wrong_pass_alert">{isError}</span>
                                                         <div className="mb-3">
                                                             <label className="form-label fs-6">Referral ID</label>
-                                                            <input type="text" className="form-control" id="ref_code2" />
+                                                            <input type="text" className="form-control" id="ref_code2" value={ref}
+                                                                onChange={(e) => setRef(e.target.value)}
+                                                            />
                                                         </div>
-                                                        <button type="submit" className="btn btn-primary text-uppercase py-2 fs-5 w-100 mt-2" onClick="wrong_pass_alert()">Create Account</button>
+                                                        <button type="submit" className="btn btn-primary text-uppercase py-2 fs-5 w-100 mt-2">Create Account</button>
                                                     </form>
                                                 </div>
                                             </div>
