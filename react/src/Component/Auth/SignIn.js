@@ -1,9 +1,37 @@
-import React from "react";
+import axios from "axios";
+import {React, useState, useEffect} from "react";
 import { Dropdown, Nav, Tab } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import AuthRight from "./AuthRight";
+import { useNavigate } from "react-router-dom";
 
 function Signin() {
+     
+    const navigate = useNavigate();
+
+    // initial state
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+
+
+    const handleLogin = (e) =>{
+     
+        e.preventionDefault()
+
+        const headers = {
+            'Content-Type': 'application/json; charst=UTF-8',
+            "Access-Control-Allow-Origin":"http://167.99.86.45:3000",
+            "Access-Control-Allow-Credentials": true
+        }
+
+        axios.post("http://167.99.86.45:3000/login", headers, {
+            email: email,
+            password: password
+        }).then(response=>{
+            navigate(process.env.PUBLIC_URL + "/")
+            alert("You have succesfully Logged in!")
+        })
+    }
     return (<>
         <div className="body d-flex p-0 p-xl-5">
             <div className="container">
@@ -21,14 +49,20 @@ function Signin() {
                                     <Tab.Pane className="tab-pane fade " id="Email" eventKey="first">
                                         <div className="card">
                                             <div className="card-body p-4">
-                                                <form>
+                                                <form onSubmit={}>
                                                     <div className="mb-3">
                                                         <label className="form-label fs-6">Email address</label>
-                                                        <input type="email" className="form-control" />
+                                                        <input type="email" className="form-control" 
+                                                        value={email}
+                                                        onChange={(e)=> setEmail(e.target.value)}
+                                                        />
                                                     </div>
                                                     <div className="mb-3">
                                                         <label className="form-label fs-6">Password</label>
-                                                        <input type="password" className="form-control" />
+                                                        <input type="password" className="form-control"
+                                                        value={password}
+                                                        onChange={(e)=> setPassword(e.target.value)}
+                                                        />
                                                     </div>
                                                     <button type="submit" className="btn btn-primary text-uppercase py-2 fs-5 w-100 mt-2">log in</button>
                                                 </form>

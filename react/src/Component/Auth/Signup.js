@@ -1,44 +1,23 @@
 import { React, useState, useEffect } from "react";
+import { redirect, useNavigate } from "react-router-dom";
 import { Dropdown, Nav, Tab } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import AuthRight from "./AuthRight";
-
-// function validate_password() {
-
-//     var pass = document.getElementById('pass').value;
-//     var confirm_pass = document.getElementById('pass2').value;
-//     if (pass !== confirm_pass) {
-//         document.getElementById('wrong_pass_alert').style.color = 'red';
-//         document.getElementById('wrong_pass_alert').innerHTML
-//             = '☒ Use same password';
-//         document.getElementById('create').disabled = true;
-//         document.getElementById('create').style.opacity = (0.4);
-//     } else {
-//         document.getElementById('wrong_pass_alert').style.color = 'green';
-//         document.getElementById('wrong_pass_alert').innerHTML =
-//             '🗹 Password Matched';
-//         document.getElementById('create').disabled = false;
-//         document.getElementById('create').style.opacity = (1);
-//     }
-// }
-
-// function wrong_pass_alert() {
-//     if (document.getElementById('pass').value !== "" &&
-//         document.getElementById('pass2').value !== "") {
-//         alert("Your response is submitted");
-//     } else {
-//         alert("Please fill all the fields");
-//     }
-// }
+import axios from "axios";
 
 function Signup() {
+    
+    const navigate = useNavigate()
 
     const [isError, setError] = useState("")
-    const [name, setName] = useState("")
+    const [Fname, setFname] = useState("")
+    const [Lname, setLname] = useState("")
     const [email, setEmail] = useState("")
+    const [phone, setPhone] = useState("")
     const [password, setPassword] = useState("")
     const [conf_pass, setConf_pass] = useState("")
     const [ref, setRef] = useState("")
+
 
     const checkValidation = (e) => {
         const conf_pass = e.target.value
@@ -59,9 +38,40 @@ function Signup() {
         elem2.value = refCode
     }
 
+    //reload when call the function
     useEffect(() => {
         onLoad();
     }, []);
+
+
+    // api integration
+    const registerUser = (e) => {
+        const headers = {
+            'Content-Type': 'application/json; charst=UTF-8',
+            "Access-Control-Allow-Origin":"http://167.99.86.45:3000",
+            "Access-Control-Allow-Credentials": true
+        }
+
+        // object of the data fields
+        e.preventDefault()
+        const data = {
+            Fname: Fname,
+            Lname: Lname,
+            email: email,
+            phone: phone,
+            password: password,
+        }
+
+        axios.post("http://167.99.86.45:3000/create",headers, data).then(response => {
+            console.log("Succesfully registered")
+            navigate(process.env.PUBLIC_URL + "/sign-in")
+            alert("You have successfully register")
+            // const ans = response.data
+            // console.log(ans)
+        }).catch(err=> {
+            console.log(err)
+        })
+    }
 
     return (
         <>
@@ -81,18 +91,32 @@ function Signup() {
                                         <Tab.Pane className="tab-pane fade" id="Email" eventKey="first">
                                             <div className="card">
                                                 <div className="card-body p-4">
-                                                    <form>
+                                                    <form onSubmit={registerUser}>
                                                         <div className="mb-3">
-                                                            <label className="form-label fs-6">Name</label>
+                                                            <label className="form-label fs-6">First Name</label>
                                                             <input type="name" className="form-control"
-                                                              value={name}
-                                                                onChange={(e) => setName(e.target.value)}
+                                                                value={Fname}
+                                                                onChange={(e) => setFname(e.target.value)}
+                                                            />
+                                                        </div>
+                                                        <div className="mb-3">
+                                                            <label className="form-label fs-6">Last Name</label>
+                                                            <input type="name" className="form-control"
+                                                                value={Lname}
+                                                                onChange={(e) => setLname(e.target.value)}
                                                             />
                                                         </div>
                                                         <div className="mb-3">
                                                             <label className="form-label fs-6">Email address</label>
                                                             <input type="email" className="form-control" value={email}
                                                                 onChange={(e) => setEmail(e.target.value)}
+                                                            />
+                                                        </div>
+                                                        <div className="mb-3">
+                                                            <label className="form-label fs-6">Phone</label>
+                                                            <input type="phone" className="form-control" value={phone}
+                                                                onChange={(e) => setPhone(e.target.value)}
+                                                                maxLength={10}
                                                             />
                                                         </div>
                                                         <div className="mb-3">
@@ -104,7 +128,7 @@ function Signup() {
                                                         <div className="mb-3">
                                                             <label className="form-label fs-6">Confirm Password</label>
                                                             <input type="password" className="form-control" id="pass2" minLength={6} required
-                                                               value={conf_pass} onChange={(e) => checkValidation(e)}
+                                                                value={conf_pass} onChange={(e) => checkValidation(e)}
                                                             />
                                                         </div>
                                                         <span id="wrong_pass">{isError}</span>
@@ -143,7 +167,7 @@ function Signup() {
                                                         <div className="mb-3">
                                                             <label className="form-label fs-6">Confirm Password</label>
                                                             <input type="password" className="form-control" id="pass2" minLength={6} required
-                                                               value={conf_pass} onChange={(e) => checkValidation(e)}
+                                                                value={conf_pass} onChange={(e) => checkValidation(e)}
                                                             />
                                                         </div>
                                                         <span id="wrong_pass_alert">{isError}</span>
