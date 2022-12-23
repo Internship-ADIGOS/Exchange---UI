@@ -46,11 +46,11 @@ function Signup() {
 
     // api integration
     const registerUser = (e) => {
-        const headers = {
-            'Content-Type': 'application/json; charst=UTF-8',
-            "Access-Control-Allow-Origin":"http://167.99.86.45:3000",
-            "Access-Control-Allow-Credentials": true
-        }
+        // const headers = {
+        //     'Content-Type': 'application/json',
+        //     'Access-Control-Allow-Origin':'http://167.99.86.45:3000',
+        //     'Access-Control-Allow-Credentials': true
+        // }
 
         // object of the data fields
         e.preventDefault()
@@ -62,7 +62,7 @@ function Signup() {
             password: password,
         }
 
-        axios.post("http://167.99.86.45:3000/create",headers, data).then(response => {
+        axios.post("http://167.99.86.45:3000/create", data).then(response => {
             console.log("Succesfully registered")
             navigate(process.env.PUBLIC_URL + "/sign-in")
             alert("You have successfully register")
