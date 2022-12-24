@@ -10,10 +10,10 @@ function Signup() {
     const navigate = useNavigate()
 
     const [isError, setError] = useState("")
-    const [Fname, setFname] = useState("")
-    const [Lname, setLname] = useState("")
-    const [email, setEmail] = useState("")
+    const [first_name, setFirst_name] = useState("")
+    const [last_name, setLast_name] = useState("")
     const [phone, setPhone] = useState("")
+    const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [conf_pass, setConf_pass] = useState("")
     const [ref, setRef] = useState("")
@@ -46,28 +46,34 @@ function Signup() {
 
     // api integration
     const registerUser = (e) => {
-        // const headers = {
-        //     'Content-Type': 'application/json',
-        //     'Access-Control-Allow-Origin':'http://167.99.86.45:3000',
-        //     'Access-Control-Allow-Credentials': true
-        // }
-
+      
+       
         // object of the data fields
         e.preventDefault()
+       
+       const headers = {
+        'Content-Type':'Application/json',
+        'Access-Control-Allow-Origin':'*',
+        'Access-Control-Allow-Credentials':true
+       }
         const data = {
-            Fname: Fname,
-            Lname: Lname,
-            email: email,
+            first_name: first_name,
+            last_name: last_name,
             phone: phone,
+            email: email,
             password: password,
         }
 
-        axios.post("http://167.99.86.45:3000/create", data).then(response => {
+        axios.post("http://167.99.86.45:3000/create",
+         {headers},
+         data
+        )
+        .then(response => {
             console.log("Succesfully registered")
-            navigate(process.env.PUBLIC_URL + "/sign-in")
-            alert("You have successfully register")
-            // const ans = response.data
-            // console.log(ans)
+            // navigate(process.env.PUBLIC_URL + "/sign-in")
+            // alert("You have successfully register")
+            const ans = response.data
+            console.log(ans)
         }).catch(err=> {
             console.log(err)
         })
@@ -95,20 +101,21 @@ function Signup() {
                                                         <div className="mb-3">
                                                             <label className="form-label fs-6">First Name</label>
                                                             <input type="name" className="form-control"
-                                                                value={Fname}
-                                                                onChange={(e) => setFname(e.target.value)}
+                                                                value={first_name}
+                                                                onChange={(e) => setFirst_name(e.target.value)}
                                                             />
                                                         </div>
                                                         <div className="mb-3">
                                                             <label className="form-label fs-6">Last Name</label>
                                                             <input type="name" className="form-control"
-                                                                value={Lname}
-                                                                onChange={(e) => setLname(e.target.value)}
+                                                                value={last_name}
+                                                                onChange={(e) => setLast_name(e.target.value)}
                                                             />
                                                         </div>
                                                         <div className="mb-3">
                                                             <label className="form-label fs-6">Email address</label>
-                                                            <input type="email" className="form-control" value={email}
+                                                            <input type="email" className="form-control"
+                                                                value={email}
                                                                 onChange={(e) => setEmail(e.target.value)}
                                                             />
                                                         </div>
