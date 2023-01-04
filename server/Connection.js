@@ -78,28 +78,28 @@ connection.query('SELECT * FROM dbt_biding_log', (error, results, fields)=>{
         })
 
         // //QUERY 2
-        // connection.query(`SELECT  (bid_price) as open,success_time FROM dbt_biding_log WHERE success_time >= '${starting}' AND success_time <= '${ending}' AND market_symbol='$pair' ORDER BY log_id asc`, (error, results, fields)=>{
+        connection.query(`SELECT  (bid_price) as open,success_time FROM dbt_biding_log WHERE success_time >= '${starting}' AND success_time <= '${ending}' AND market_symbol='$pair' ORDER BY log_id asc`, (error, results, fields)=>{
             
-        //     if(error){
-        //         console.log(error)
-        //     }
+            if(error){
+                console.log(error)
+            }
             
-        //     console.log(results)  
-        // })
+            console.log(results)  
+        })
         
         // //QUERY 3
-        // connection.query(`SELECT (bid_price) as close,success_time FROM dbt_biding_log WHERE success_time >= '${starting}' AND success_time <= '${ending}'  AND market_symbol='$pair' ORDER BY log_id desc`, (error, results, fields)=>{
+        connection.query(`SELECT bid_price as close, success_time FROM dbt_biding_log WHERE success_time >= '${starting}' AND success_time <= '${ending}'  AND market_symbol='$pair' ORDER BY log_id desc`, (error, results, fields)=>{
             
-        //     if(error){
-        //         console.log(error)
-        //     }
+            if(error){
+                console.log(error)
+            }
             
-        //     console.log(results)
-            
-        // })
+            console.log(results)            
+        })
 
 }
-    // {"t":[],"o":[],"h":[],"l":[],"c":[],"v":[],"s":"ok"}
+
+// {"t":[],"o":[],"h":[],"l":[],"c":[],"v":[],"s":"ok"}
 //t = success_time convert it into string time format
 //store the output in the json file
 
