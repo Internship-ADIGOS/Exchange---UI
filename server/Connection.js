@@ -51,12 +51,38 @@ connection.query('SELECT * FROM dbt_biding_log', (error, results, fields)=>{
     //loop 
     for(var i=five_mins_ago; i<=current_time; i += 60000){
          
-        const ans = new Date(i)
+        // const starting = new Date(i)
+        const high = i
+        const end = high + 60000
+
+        const starting = new Date(high).toLocaleString("sv-SE")
+        const ending = new Date(end).toLocaleString("sv-SE")
+        console.log(starting)
+        console.log(ending)
+        console.log("--")
+        // const ending = new Date(i + 60000)
+
         // console.log(ans.toLocaleDateString())
         // console.log(ans.toLocaleTimeString())
-        console.log(ans.toLocaleString())
-    }
-    // connection.query(`SELECT SUM(complete_qty) as volume,MIN(bid_price) as low,MAX(bid_price) as high,success_time FROM dbt_biding_log WHERE success_time >= '2022-11-30 21:54:08' AND success_time <= '2022-11-30 21:55:08'     market_Symbol='BTC_USDT';`)
+        // console.log(starting.toLocaleString("sv-SE"))
 
+        connection.query(`SELECT SUM(complete_qty) as volume,MIN(bid_price) as low, MAX(bid_price) as high,success_time FROM dbt_biding_log WHERE success_time >= '${starting}' AND success_time <= '${ending}' AND market_Symbol='BTC_USDT'`, (error, results, fields)=>{
+
+            //if any error exists
+            if(error){
+                console.log(error)
+            }
+
+            console.log(results)
+        })
+    }
+
+    //QUERY 2
 })
 
+// {"t":[],"o":[],"h":[],"l":[],"c":[],"v":[],"s":"ok"}
+//t = success_time convert it into string time format
+//store the output in the json file
+
+//desired foramt
+// 2023-01-04 17:00:00
