@@ -66,6 +66,7 @@ connection.query('SELECT * FROM dbt_biding_log', (error, results, fields)=>{
         // console.log(ans.toLocaleTimeString())
         // console.log(starting.toLocaleString("sv-SE"))
 
+        //QUERY 1
         connection.query(`SELECT SUM(complete_qty) as volume,MIN(bid_price) as low, MAX(bid_price) as high,success_time FROM dbt_biding_log WHERE success_time >= '${starting}' AND success_time <= '${ending}' AND market_Symbol='BTC_USDT'`, (error, results, fields)=>{
 
             //if any error exists
@@ -75,14 +76,34 @@ connection.query('SELECT * FROM dbt_biding_log', (error, results, fields)=>{
 
             console.log(results)
         })
-    }
 
-    //QUERY 2
-})
+        // //QUERY 2
+        // connection.query(`SELECT  (bid_price) as open,success_time FROM dbt_biding_log WHERE success_time >= '${starting}' AND success_time <= '${ending}' AND market_symbol='$pair' ORDER BY log_id asc`, (error, results, fields)=>{
+            
+        //     if(error){
+        //         console.log(error)
+        //     }
+            
+        //     console.log(results)  
+        // })
+        
+        // //QUERY 3
+        // connection.query(`SELECT (bid_price) as close,success_time FROM dbt_biding_log WHERE success_time >= '${starting}' AND success_time <= '${ending}'  AND market_symbol='$pair' ORDER BY log_id desc`, (error, results, fields)=>{
+            
+        //     if(error){
+        //         console.log(error)
+        //     }
+            
+        //     console.log(results)
+            
+        // })
 
-// {"t":[],"o":[],"h":[],"l":[],"c":[],"v":[],"s":"ok"}
+}
+    // {"t":[],"o":[],"h":[],"l":[],"c":[],"v":[],"s":"ok"}
 //t = success_time convert it into string time format
 //store the output in the json file
 
 //desired foramt
 // 2023-01-04 17:00:00
+
+})
