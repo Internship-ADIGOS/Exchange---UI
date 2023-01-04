@@ -88,25 +88,27 @@ connection.query('SELECT * FROM dbt_biding_log', (error, results, fields)=>{
             var time = results[0].success_time
             
             if(vol != ''){
-                vol = vol + ','
+                vol = vol + ', '
             }
             if(high1 != ''){
-                high1 = high1 + ','
+                high1 = high1 + ', '
             }
             if(low1 != ''){
-                low1 = low1 + ','
+                low1 = low1 + ', '
             }
             if(time != ''){
-                time = time + ','
+                time = time + ', '
             }
 
             //assigning to the charts
-            chart += time.toLocaleTimeString("sv-SE")
+            chart += Date.parse(time)
             chart3 += high1
             chart4 += low1
             chart5 += vol
 
             console.log(chart)
+            // console.log(chart3)
+            // console.log(chart4)
         })
    
         // //QUERY 2
@@ -121,6 +123,7 @@ connection.query('SELECT * FROM dbt_biding_log', (error, results, fields)=>{
             if(open1 != ''){
                 open1 = open1 + ','
             }
+            chart2 = open1
 
             // console.log(open1)  
         })
@@ -132,8 +135,14 @@ connection.query('SELECT * FROM dbt_biding_log', (error, results, fields)=>{
                 console.log(error)
             }
             var close1 = results[0].close
-            console.log(results)            
+            
+            if(close1 != ''){
+                close1 = close1 + ','
+            }
+
+            chart1 = close1
         })
+        
 
 }
 
