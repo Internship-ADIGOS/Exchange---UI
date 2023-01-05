@@ -78,40 +78,45 @@ var vol = results[0][0].volume
             chart4 += low1
             chart5 += vol
             console.log('--------------------')
-            console.log('Time : '+chart)
-            console.log('high : '+chart3)
-            console.log('low : ' +chart4)
+            console.log('Time : '+ chart)
+            console.log('high : '+ chart3)
+            console.log('low : ' + chart4)
             
 
    
         // //QUERY 2
-var result0= await conn.query(`SELECT  (bid_price) as open,open_order FROM dbt_biding WHERE open_order >= '${starting}' AND open_order <= '${ending}' AND market_symbol='BTC_USDT' ORDER BY id asc`)
+var result0 = await conn.query(`SELECT bid_price as open,open_order FROM dbt_biding WHERE open_order >= '${starting}' AND open_order <= '${ending}' AND market_symbol='BTC_USDT' ORDER BY id asc`)
            
             var open1 = result0[0][0].open
 
             if(open1 != ''){
-                open1 = open1 + ','
+                open1 = open1 + ', '
             }
             chart2 += open1
 
-            console.log('open : '+chart2)  
+            console.log('open : '+ chart2)  
+
         // //QUERY 3
-       var result3= await conn.query(`SELECT bid_price as close, open_order FROM dbt_biding WHERE open_order >= '${starting}' AND open_order <= '${ending}'  AND market_symbol='BTC_USDT' ORDER BY id desc`)
-        var close1 = result3[0][0].close
+var result3= await conn.query(`SELECT bid_price as close, open_order FROM dbt_biding WHERE open_order >= '${starting}' AND open_order <= '${ending}'  AND market_symbol='BTC_USDT' ORDER BY id desc`)
+        
+var close1 = result3[0][0].close
             
         if(close1 != ''){
-            close1 = close1 + ','
+            close1 = close1 + ', '
         }
 
         chart1 += close1
-        console.log('close : ' +result3);
+        console.log('close : ' +chart3);
 
-}str = str.replace(/,\s*$/, "");
+}
+str = str.replace(/,\s*$/, "");
+
 
 var newarray='{"t":['+chart.replace(/,\s*$/, "")+'],"o":['+chart2.replace(/,\s*$/, "")+'],"h":['+chart3.replace(/,\s*$/, "")+'],"l":['+chart4.replace(/,\s*$/, "")+'],"c":['+chart1.replace(/,\s*$/, "")+'],"v":['+chart5.replace(/,\s*$/, "")+'],"s":"ok"}';
 //t = open_order convert it into string time format
 //store the output in the json file
 
+console.log(newarray)
 //desired foramt
 // 2023-01-04 17:00:00
 
