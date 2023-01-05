@@ -42,10 +42,12 @@ module.exports = connectDB
         //QUERY 1
        const answer =  connection.query(`SELECT SUM(complete_qty) as volume,MIN(bid_price) as low, MAX(bid_price) as high,success_time FROM dbt_biding_log WHERE success_time >= '${starting}' AND success_time <= '${ending}' AND market_Symbol='BTC_USDT'`)
 
-            var high1 = answer.high
-            var vol = answer.volume
-            var low1 =  answer.low
-            var time = answer.open_order
+       console.log(answer)
+
+            var high1 = answer.high  //undefined
+            var vol = answer.volume  //undefined
+            var low1 =  answer.low    //undefined
+            var time = answer.open_order  //undefined
 
             if(vol != ''){
                 vol = vol + ', '
@@ -86,7 +88,7 @@ module.exports = connectDB
             var close1 = answer3.close
             
             if(close1 != ''){
-                close1 = close1 + ','
+                close1 = close1 + ', '
             }
             
             chart1 += close1

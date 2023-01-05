@@ -1,5 +1,8 @@
 {
   "dependencies": {
-    "mysql": "^2.18.1"
+    "fetch-node": "^0.0.1",
+    "fs": "^0.0.1-security",
+    "mysql": "^2.18.1",
+    "node-fetch-commonjs": "^3.2.4"
   }
 }
