@@ -1,14 +1,15 @@
 const fetch = require('node-fetch-commonjs');
 // const New = require('./config/mysql');
 const mysql = require('mysql2/promise');
+const { rejects } = require('assert');
 
 async function New() {
     try {
         const conn = await mysql.createConnection({
             host: 'localhost',
-            user: "phpmyadmin",
+            user: "root",
             password: "",
-            database: "newdb"
+            database: "internship"
         });
         return conn
     }
@@ -16,8 +17,8 @@ async function New() {
         console.log(err.message);
     }
 }
-module.exports = New;
-async function BTC() {
+module.exports = New;
+ const  BTC = async () => {
     try {
     const conn = await New();
 
@@ -29,7 +30,7 @@ async function BTC() {
 
     const before_time = current_time - 60000
 
-    const start_date = new Date(before_time)
+    const start_date =  new Date(before_time)
 
     const five_mins_ago = current_time - 120600000
     console.log(new Date(five_mins_ago).toLocaleString("sv-SE"))
@@ -83,7 +84,7 @@ var vol = results[0][0].volume
             }
 
             //assigning to the charts
-            chart += (Date.parse(time))/1000 +','
+            chart += (Date.parse(time))/1000 + ', '
             chart3 += high1
             chart4 += low1
             chart5 += vol
@@ -139,19 +140,42 @@ var newarray='{"t":['+chart.replace(/,\s*$/, "")+'],"o":['+chart2.replace(/,\s*$
 // 2023-01-04 17:00:00
 
 const fs = require('fs');
-const writeStream = fs.createWriteStream('TRX_USDT.json');
-const pathName = writeStream.path;
- 
-// let array = ['1','2','3','4','5','6','7'];
-  
-// // array.forEach(value => 
-    writeStream.write(`${newarray}\n`)
-    
-//     // );
 
+const writeStream = fs.createWriteStream('TRX_USDT2.json');
+const pathName = writeStream.path;
+
+//approach 1
+
+// fs.writeToFile('TRX_USDT2.json', 
+//         new Promise((resolve, reject)=>{
+//         const file = fs.createWriteStream('TRX_USDT2.json');
+//         newarray.forEach(function(row){
+//             file.write(row +  '\n')
+//         });
+//         file.end();
+//         file.on("finish", () => {
+//             resolve(true)
+//         })
+// }
+
+//approach 2
+// fs.writeFileSync('TRX_USDT2.json', JSON.stringify(newarray))
+ 
+// // let array = ['1','2','3','4','5','6','7'];
+  
+// //if there are  null and Nan values then dont push it to the JSON file
+if(chart != null || NaN && chart1 != null || NaN && chart2 != null || NaN && chart3 != null || NaN  && chart4 != null || NaN ){
+    // // array.forEach(value => 
+    writeStream.write(`${newarray}\n`)
+    //// );
+}
+
+
+// //function for writing into the file    
 writeStream.on('finish', () => {
    console.log(`wrote all the array data to file ${pathName}`);
 });
+
 
 writeStream.on('error', (err) => {
     console.error(`There is an error writing the file ${pathName} => ${err}`)
