@@ -148,10 +148,10 @@ const pathName = writeStream.path;
 async function createWriteStreamAsync(pathName){
     return new Promise((resolve, reject) =>{ 
         const writeStream = fs.createWriteStream(pathName);
-        stream.on('open', () =>{
-            resolve(stream)
+        writeStream.on('open', () =>{
+            resolve(writeStream)
         });
-        stream.on('error', (error)=>{
+        writeStream.on('error', (error)=>{
             reject(error);
         });
     });
@@ -165,7 +165,11 @@ async function createWriteStreamAsync(pathName){
      console.error(error);
     }
 })();
-
+}catch (err) {
+    console.log(err);
+}
+}
+BTC()
 //approach 2
 // fs.writeFileSync('TRX_USDT2.json', JSON.stringify(newarray))
  
@@ -202,8 +206,3 @@ async function createWriteStreamAsync(pathName){
 
 // // })
 // }
-// catch (err) {
-//     console.log(err);
-// }
-// }
-// BTC()
