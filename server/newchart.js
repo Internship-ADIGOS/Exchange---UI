@@ -105,14 +105,15 @@ if(Array.isArray(result0[0]) && !result0[0].length)
  }
  else
  {
-            var open1 = result0[0][0].open
+    var open1 = result0[0][0].open
 
-            if(open1 != ''){
-                open1 = open1 + ','
-            }
-            chart2 += open1
+        if(open1 != ''){
+            open1 = open1 + ','
         }
+        chart2 += open1
+    }
             // console.log('open : '+chart2)  
+
         // //QUERY 3
        var result3= await conn.query(`SELECT bid_price as close, success_time FROM dbt_biding_log WHERE success_time >= '${starting}' AND success_time <= '${ending}'  AND market_symbol='TRX_USDT' ORDER BY log_id desc`)
        
@@ -140,62 +141,69 @@ var newarray='{"t":['+chart.replace(/,\s*$/, "")+'],"o":['+chart2.replace(/,\s*$
 // 2023-01-04 17:00:00
 
 const fs = require('fs');
-
-const writeStream = fs.createWriteStream('TRX_USDT2.json');
+const writeStream = await createWriteStreamAsync('my-file.txt');
 const pathName = writeStream.path;
 
 //approach 1
+async function createWriteStreamAsync(pathName){
+    return new Promise((resolve, reject) =>{ 
+        const writeStream = fs.createWriteStream(pathName);
+        stream.on('open', () =>{
+            resolve(stream)
+        });
+        stream.on('error', (error)=>{
+            reject(error);
+        });
+    });
+}
 
-// fs.writeToFile('TRX_USDT2.json', 
-//         new Promise((resolve, reject)=>{
-//         const file = fs.createWriteStream('TRX_USDT2.json');
-//         newarray.forEach(function(row){
-//             file.write(row +  '\n')
-//         });
-//         file.end();
-//         file.on("finish", () => {
-//             resolve(true)
-//         })
-// }
+(async ()=>{
+    try{
+        const writeStream = await createWriteStreamAsync(newarray);
+        console.log('Write stream created successfully');
+    }catch(error){
+     console.error(error);
+    }
+})();
 
 //approach 2
 // fs.writeFileSync('TRX_USDT2.json', JSON.stringify(newarray))
  
 // // let array = ['1','2','3','4','5','6','7'];
   
-// //if there are  null and Nan values then dont push it to the JSON file
-if(chart != null || NaN && chart1 != null || NaN && chart2 != null || NaN && chart3 != null || NaN  && chart4 != null || NaN ){
-    // // array.forEach(value => 
-    writeStream.write(`${newarray}\n`)
-    //// );
-}
+// // //if there are  null and Nan values then dont push it to the JSON file
+// if(chart != null || NaN && chart1 != null || NaN && chart2 != null || NaN && chart3 != null || NaN  && chart4 != null || NaN ){
+//     // // array.forEach(value => 
+//     writeStream.writeFile(`${newarray}\n`)
+//     //// );
+// }
 
 
-// //function for writing into the file    
-writeStream.on('finish', () => {
-   console.log(`wrote all the array data to file ${pathName}`);
-});
+// // //function for writing into the file    
+// writeStream.on('finish', () => {
+//    console.log(`wrote all the array data to file ${pathName}`);
+// });
 
 
-writeStream.on('error', (err) => {
-    console.error(`There is an error writing the file ${pathName} => ${err}`)
-});
+// writeStream.on('error', (err) => {
+//     console.error(`There is an error writing the file ${pathName} => ${err}`)
+// });
 
-writeStream.end();
+// writeStream.end();
 
-// const fs = require('fs');
+// // const fs = require('fs');
 
-// fs.readFile('./file.txt', 'utf8', (error, data) => {
-//      if(error){
-//         console.log(error);
-//         return;
-//      }
-//      console.log(JSON.parse(data).t);
+// // fs.readFile('./file.txt', 'utf8', (error, data) => {
+// //      if(error){
+// //         console.log(error);
+// //         return;
+// //      }
+// //      console.log(JSON.parse(data).t);
 
-// })
-}
-catch (err) {
-    console.log(err);
-}
-}
-BTC();
+// // })
+// }
+// catch (err) {
+//     console.log(err);
+// }
+// }
+// BTC()
