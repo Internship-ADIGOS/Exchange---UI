@@ -6,9 +6,9 @@ async function New() {
     try {
         const conn = await mysql.createConnection({
             host: 'localhost',
-            user: "phpmyadmin",
+            user: "root",
             password: "",
-            database: "newdb"
+            database: "internship"
         });
         return conn
     }
@@ -57,7 +57,7 @@ console.log('--------------------')
 // console.log('--------------------')
            
         //QUERY 1
-var results= await conn.query(`SELECT SUM(complete_qty) as volume,MIN(bid_price) as low, MAX(bid_price) as high,success_time FROM dbt_biding_log WHERE success_time >= '${starting}' AND success_time <= '${ending}' AND market_symbol='TRX_USDT'`)
+var results= await conn.query(`SELECT SUM(complete_qty) as volume,MIN(bid_price) as low, MAX(bid_price) as high,success_time FROM dbt_biding_log WHERE success_time >= '${starting}' AND success_time <= '${ending}' AND market_symbol='TRX_USDT2'`)
    
 console.log('--------------------')
 if ( results[0].length > 0)
@@ -96,7 +96,7 @@ var vol = results[0][0].volume
    
         // //QUERY 2
 }
-var result0= await conn.query(`SELECT  (bid_price) as open,success_time FROM dbt_biding_log WHERE success_time >= '${starting}' AND success_time <= '${ending}' AND market_symbol='TRX_USDT' ORDER BY log_id asc`)
+var result0= await conn.query(`SELECT  (bid_price) as open,success_time FROM dbt_biding_log WHERE success_time >= '${starting}' AND success_time <= '${ending}' AND market_symbol='TRX_USDT2' ORDER BY log_id asc`)
 // console.log(result0); 
 if(Array.isArray(result0[0]) && !result0[0].length)
  { 
@@ -113,7 +113,7 @@ if(Array.isArray(result0[0]) && !result0[0].length)
         }
             // console.log('open : '+chart2)  
         // //QUERY 3
-       var result3= await conn.query(`SELECT bid_price as close, success_time FROM dbt_biding_log WHERE success_time >= '${starting}' AND success_time <= '${ending}'  AND market_symbol='TRX_USDT' ORDER BY log_id desc`)
+       var result3= await conn.query(`SELECT bid_price as close, success_time FROM dbt_biding_log WHERE success_time >= '${starting}' AND success_time <= '${ending}'  AND market_symbol='TRX_USDT2' ORDER BY log_id desc`)
        
        if(Array.isArray(result3[0]) && !result3[0].length)
        {}
@@ -139,13 +139,13 @@ var newarray='{"t":['+chart.replace(/,\s*$/, "")+'],"o":['+chart2.replace(/,\s*$
 // 2023-01-04 17:00:00
 
 const fs = require('fs');
-const writeStream = fs.createWriteStream('TRX_USDT.json');
+const writeStream = fs.createWriteStream('TRX_USDT2.json');
 const pathName = writeStream.path;
  
 // let array = ['1','2','3','4','5','6','7'];
   
 // // array.forEach(value => 
-    writeStream.write(`${newarray}\n`)
+writeStream.write(`${newarray}\n`)
     
 //     // );
 
