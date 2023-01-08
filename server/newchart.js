@@ -1,15 +1,14 @@
 const fetch = require('node-fetch-commonjs');
 // const New = require('./config/mysql');
 const mysql = require('mysql2/promise');
-const { rejects } = require('assert');
 
 async function New() {
     try {
         const conn = await mysql.createConnection({
             host: 'localhost',
-            user: "root",
+            user: "phpmyadmin",
             password: "",
-            database: "internship"
+            database: "newdb"
         });
         return conn
     }
@@ -17,8 +16,8 @@ async function New() {
         console.log(err.message);
     }
 }
-module.exports = New;
- const  BTC = async () => {
+module.exports = New;
+async function BTC() {
     try {
     const conn = await New();
 
@@ -30,7 +29,7 @@ module.exports = New;
 
     const before_time = current_time - 60000
 
-    const start_date =  new Date(before_time)
+    const start_date = new Date(before_time)
 
     const five_mins_ago = current_time - 120600000
     console.log(new Date(five_mins_ago).toLocaleString("sv-SE"))
@@ -84,7 +83,7 @@ var vol = results[0][0].volume
             }
 
             //assigning to the charts
-            chart += (Date.parse(time))/1000 + ', '
+            chart += (Date.parse(time))/1000 +','
             chart3 += high1
             chart4 += low1
             chart5 += vol
@@ -105,15 +104,14 @@ if(Array.isArray(result0[0]) && !result0[0].length)
  }
  else
  {
-    var open1 = result0[0][0].open
+            var open1 = result0[0][0].open
 
-        if(open1 != ''){
-            open1 = open1 + ','
+            if(open1 != ''){
+                open1 = open1 + ','
+            }
+            chart2 += open1
         }
-        chart2 += open1
-    }
             // console.log('open : '+chart2)  
-
         // //QUERY 3
        var result3= await conn.query(`SELECT bid_price as close, success_time FROM dbt_biding_log WHERE success_time >= '${starting}' AND success_time <= '${ending}'  AND market_symbol='TRX_USDT' ORDER BY log_id desc`)
        
@@ -141,68 +139,39 @@ var newarray='{"t":['+chart.replace(/,\s*$/, "")+'],"o":['+chart2.replace(/,\s*$
 // 2023-01-04 17:00:00
 
 const fs = require('fs');
-const writeStream = await createWriteStreamAsync('my-file.txt');
+const writeStream = fs.createWriteStream('TRX_USDT.json');
 const pathName = writeStream.path;
+ 
+// let array = ['1','2','3','4','5','6','7'];
+  
+// // array.forEach(value => 
+    writeStream.write(`${newarray}\n`)
+    
+//     // );
 
-//approach 1
-async function createWriteStreamAsync(pathName){
-    return new Promise((resolve, reject) =>{ 
-        const writeStream = fs.createWriteStream(pathName);
-        writeStream.on('open', () =>{
-            resolve(writeStream)
-        });
-        writeStream.on('error', (error)=>{
-            reject(error);
-        });
-    });
+writeStream.on('finish', () => {
+   console.log(`wrote all the array data to file ${pathName}`);
+});
+
+writeStream.on('error', (err) => {
+    console.error(`There is an error writing the file ${pathName} => ${err}`)
+});
+
+writeStream.end();
+
+// const fs = require('fs');
+
+// fs.readFile('./file.txt', 'utf8', (error, data) => {
+//      if(error){
+//         console.log(error);
+//         return;
+//      }
+//      console.log(JSON.parse(data).t);
+
+// })
 }
-
-(async ()=>{
-    try{
-        const writeStream = await createWriteStreamAsync(newarray);
-        console.log('Write stream created successfully');
-    }catch(error){
-     console.error(error);
-    }
-})();
-}catch (err) {
+catch (err) {
     console.log(err);
 }
 }
-BTC()
-//approach 2
-// fs.writeFileSync('TRX_USDT2.json', JSON.stringify(newarray))
- 
-// // let array = ['1','2','3','4','5','6','7'];
-  
-// // //if there are  null and Nan values then dont push it to the JSON file
-// if(chart != null || NaN && chart1 != null || NaN && chart2 != null || NaN && chart3 != null || NaN  && chart4 != null || NaN ){
-//     // // array.forEach(value => 
-//     writeStream.writeFile(`${newarray}\n`)
-//     //// );
-// }
-
-
-// // //function for writing into the file    
-// writeStream.on('finish', () => {
-//    console.log(`wrote all the array data to file ${pathName}`);
-// });
-
-
-// writeStream.on('error', (err) => {
-//     console.error(`There is an error writing the file ${pathName} => ${err}`)
-// });
-
-// writeStream.end();
-
-// // const fs = require('fs');
-
-// // fs.readFile('./file.txt', 'utf8', (error, data) => {
-// //      if(error){
-// //         console.log(error);
-// //         return;
-// //      }
-// //      console.log(JSON.parse(data).t);
-
-// // })
-// }
+BTC();
