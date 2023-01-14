@@ -50,11 +50,9 @@ function Signup() {
         // object of the data fields
         e.preventDefault()
        
-       const headers = {
-        'Content-Type':'Application/json',
-        'Access-Control-Allow-Origin':'*',
-        'Access-Control-Allow-Credentials':true
-       }
+    //    const headers = {
+    //     'Content-Type':'application/json',
+    //    }
         const data = {
             first_name: first_name,
             last_name: last_name,
@@ -64,10 +62,8 @@ function Signup() {
         }
 
         axios.post("http://167.99.86.45:3000/create",
-         {headers},
          data
-        )
-        .then(response => {
+        ).then(response => {
             console.log("Succesfully registered")
             // navigate(process.env.PUBLIC_URL + "/sign-in")
             // alert("You have successfully register")
