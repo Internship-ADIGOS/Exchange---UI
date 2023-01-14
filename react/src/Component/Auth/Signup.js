@@ -46,8 +46,7 @@ function Signup() {
 
     // api integration
     const registerUser = (e) => {
-      
-       
+        
         // object of the data fields
         e.preventDefault()
        

@@ -23,8 +23,8 @@ import BCH from '../../../assets/images/coin/BCH.png';
 import BNB from '../../../assets/images/coin/BNB.png';
 import BNT from '../../../assets/images/coin/BNT.png';
 import BTC from '../../../assets/images/coin/BTC.png';
-
-
+import axios from 'axios'
+import { useEffect } from 'react'
 
 
 export const marketCardData = [
@@ -60,6 +60,7 @@ export const marketCardData = [
         color: true
     }
 ]
+
 
 export const favoriteSpotData = {
 

@@ -2,9 +2,35 @@ import React from 'react';
 import { Nav, Tab } from 'react-bootstrap';
 import DataTable from 'react-data-table-component';
 import { AllCripto, favoritefutureData, favoriteMarginData, favoriteSpotData, feutureMarketCOIN, feutureMarketUSD, newListing, soptMarkebnb, soptMarkeBTC, soptMarketALTS, soptMarketETF, soptMarketFAIT } from '../Data/MarketData/MarketData';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+
+
 
 
 function MarketTabing() {
+
+    const [data, setData] = useState([])
+    
+    const getCoins = () =>{
+        // const headers = {
+        //     'Content-Type':'Application/json',
+        //     'Access-Control-Allow-Origin':'*',
+        //     'Access-Control-Allow-Credentials':true
+        // }
+        axios.get("http://167.99.86.45:3000/markets").then(response => {
+        console.log(response.data)
+        // setData(response.data.id)
+        }).catch(err => {
+        console.error(err)
+        })
+    }
+    
+    //every second it will hit on reload
+    useEffect(()=>{
+        getCoins();
+    }, [])
+
     return (
         <>
             <Tab.Container defaultActiveKey='first'>
