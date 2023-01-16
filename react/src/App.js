@@ -7,7 +7,9 @@ import AuthIndex from './Screen/AuthIndex';
 import menu from '../src/Component/Data/Menu/Menu.json';
 import menu2 from '../src/Component/Data/Menu/Menu2.json';
 
+
 function App(props) {
+  const user = localStorage.getItem('token')
   const [menuData, setMenuData] = useState([...menu.menu]);
   const navigate = useNavigate();
   var baseUrl = process.env.PUBLIC_URL
@@ -17,7 +19,7 @@ function App(props) {
     baseUrl = baseUrl.split("/");
     res = res.split("/");
     res = res.length > 0 ? res[baseUrl.length] : "/";
-    res = res ? "/" + res : "/";;
+    res = res ? "/" + res : "/";
     const activeKey1 = res;
     return activeKey1
   }

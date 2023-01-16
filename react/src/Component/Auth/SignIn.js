@@ -13,30 +13,25 @@ function Signin() {
     // initial state
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [show, setShow] = useState(false)
 
 
     const handleLogin = (e) =>{
      
         e.preventDefault()
 
-        // const headers = {
-        //     'Content-Type': 'application/json; charst=UTF-8',
-        //     "Access-Control-Allow-Origin":"http://167.99.86.45:3000",
-        //     "Access-Control-Allow-Credentials": true
-        // }
         const data = {
             email: email,
             password: password
         }
         axios.post("http://167.99.86.45:3000/login", data).then(response=>{
+            setShow(true)
             navigate(process.env.PUBLIC_URL + "/")
 
-           return <Alert key={"success"} variant={"success"}>
-            You have successfully logged in!
-           </Alert>
         })
     }
     return (<>
+
         <div className="body d-flex p-0 p-xl-5">
             <div className="container">
                 <div className="row g-3">

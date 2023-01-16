@@ -20,7 +20,7 @@ function MarketTabing() {
         // }
         axios.get("http://167.99.86.45:3000/markets").then(response => {
         console.log(response.data)
-        // setData(response.data.id)
+        setData(response.data)
         }).catch(err => {
         console.error(err)
         })

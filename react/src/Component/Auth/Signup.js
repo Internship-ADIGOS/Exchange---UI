@@ -64,7 +64,8 @@ function Signup() {
         // navigate(process.env.PUBLIC_URL + "/sign-in")
         // alert("You have successfully register")
         const ans = response.data
-        navigate(process.env.PUBLIC_URL + "/")
+        window.localStorage.getItem('token')
+        navigate(process.env.PUBLIC_URL + "/sign-in")
     }).catch(err=> {
         console.log(err)
     })
