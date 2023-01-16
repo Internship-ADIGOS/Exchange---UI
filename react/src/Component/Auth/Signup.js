@@ -47,32 +47,28 @@ function Signup() {
     // api integration
     const registerUser = (e) => {
         
-        // object of the data fields
-        e.preventDefault()
+    e.preventDefault()
        
-    //    const headers = {
-    //     'Content-Type':'application/json',
-    //    }
-        const data = {
-            first_name: first_name,
-            last_name: last_name,
-            phone: phone,
-            email: email,
-            password: password,
-        }
-
-        axios.post("http://167.99.86.45:3000/create",
-         data
-        ).then(response => {
-            console.log("Succesfully registered")
-            // navigate(process.env.PUBLIC_URL + "/sign-in")
-            // alert("You have successfully register")
-            const ans = response.data
-            console.log(ans)
-        }).catch(err=> {
-            console.log(err)
-        })
+    const data = {
+        first_name: first_name,
+        last_name: last_name,
+        phone: phone,
+        email: email,
+        password: password,
     }
+
+ axios.post("http://167.99.86.45:3000/create",
+        data
+    ).then(response => {
+        console.log("Succesfully registered")
+        // navigate(process.env.PUBLIC_URL + "/sign-in")
+        // alert("You have successfully register")
+        const ans = response.data
+        navigate(process.env.PUBLIC_URL + "/")
+    }).catch(err=> {
+        console.log(err)
+    })
+}
 
     return (
         <>

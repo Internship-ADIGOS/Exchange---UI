@@ -4,6 +4,7 @@ import { Dropdown, Nav, Tab } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import AuthRight from "./AuthRight";
 import { useNavigate } from "react-router-dom";
+import Alert from 'react-bootstrap/Alert';
 
 function Signin() {
      
@@ -16,20 +17,23 @@ function Signin() {
 
     const handleLogin = (e) =>{
      
-        e.preventionDefault()
+        e.preventDefault()
 
-        const headers = {
-            'Content-Type': 'application/json; charst=UTF-8',
-            "Access-Control-Allow-Origin":"http://167.99.86.45:3000",
-            "Access-Control-Allow-Credentials": true
-        }
-
-        axios.post("http://167.99.86.45:3000/login", headers, {
+        // const headers = {
+        //     'Content-Type': 'application/json; charst=UTF-8',
+        //     "Access-Control-Allow-Origin":"http://167.99.86.45:3000",
+        //     "Access-Control-Allow-Credentials": true
+        // }
+        const data = {
             email: email,
             password: password
-        }).then(response=>{
+        }
+        axios.post("http://167.99.86.45:3000/login", data).then(response=>{
             navigate(process.env.PUBLIC_URL + "/")
-            alert("You have succesfully Logged in!")
+
+           return <Alert key={"success"} variant={"success"}>
+            You have successfully logged in!
+           </Alert>
         })
     }
     return (<>
