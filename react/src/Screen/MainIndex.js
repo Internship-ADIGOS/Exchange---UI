@@ -83,7 +83,7 @@ function MainIndex(props) {
             }
             {user && show && <Alert variant='success'>
                  Succesfully Logged In!
-                <button style={{marginLeft:28}} type="button" className="btn-close" data-dismiss="alert" aria-label="Close" onClick={handleShow}></button>
+                <button style={{float:'right'}} type="button" className="btn-close" data-dismiss="alert" aria-label="Close" onClick={handleShow}></button>
             </Alert>
             }
             <NewModal
