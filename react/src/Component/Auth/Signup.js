@@ -58,13 +58,12 @@ function Signup() {
     }
 
  axios.post("http://167.99.86.45:3000/create",
-        data
+    data
     ).then(response => {
         console.log("Succesfully registered")
         // navigate(process.env.PUBLIC_URL + "/sign-in")
         // alert("You have successfully register")
         const ans = response.data
-        window.localStorage.getItem('token')
         navigate(process.env.PUBLIC_URL + "/sign-in")
     }).catch(err=> {
         console.log(err)

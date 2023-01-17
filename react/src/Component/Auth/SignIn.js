@@ -10,17 +10,25 @@ import Alert from 'react-bootstrap/Alert';
 function Signin() {
      
     const navigate = useNavigate();
-
+     
     // initial state
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [show, setShow] = useState(false)
+    const [showLog, setShowLog] = useState(true)
+
+    //getting the status of the token
+    const user = window.localStorage.getItem('token')
 
     //function  to close the alert
     function handleClose(){
         setShow(false)
     }
-
+ 
+    //function to close the log alert 
+    function handleLog(){
+        setShowLog(false)
+    }
     const handleLogin = (e) =>{
      
         e.preventDefault()
@@ -32,12 +40,15 @@ function Signin() {
         axios.post("http://167.99.86.45:3000/login", data).then(response=>{
             setShow(true)
             navigate(process.env.PUBLIC_URL + "/")
+            window.localStorage.setItem('token', response.data.token)
 
         }).catch(err=>{
             console.error(err);
             setShow(true)
         })
     }
+
+    
 
     return (<>
 
@@ -48,6 +59,11 @@ function Signin() {
                  Invalid Credentials!
                 <button style={{float:'right'}} type="button" className="btn-close" data-dismiss="alert" aria-label="Close" onClick={handleClose}></button>
             </Alert> }
+                { !user && showLog && <Alert variant='success'>
+                 Succesfully Logged Out!
+                <button style={{float:'right'}} type="button" className="btn-close" data-dismiss="alert" aria-label="Close" onClick={handleLog}></button>
+            </Alert> }
+        
                     <div className="col-lg-6 d-flex justify-content-center align-items-center auth-h100">
                         <div className="d-flex flex-column">
                             <h1>Account Login</h1>

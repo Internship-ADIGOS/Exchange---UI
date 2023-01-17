@@ -67,7 +67,7 @@ function MainIndex(props) {
     const { activekey, GotoChangeMenu } = props;
     const navigate = useNavigate();
     const baseUrl = process.env.PUBLIC_URL;
-    const user = localStorage.getItem('token')
+
     const [show, setShow] = useState(true)
 
     function handleShow(){

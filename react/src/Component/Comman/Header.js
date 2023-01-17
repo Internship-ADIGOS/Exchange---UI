@@ -32,6 +32,10 @@ function Header(props) {
             }
         }
     }
+
+    function handleRemove(){
+        window.localStorage.removeItem('token')
+    }
     return (
         <div className="header">
             <nav className="navbar py-4">
@@ -208,7 +212,7 @@ function Header(props) {
                                             </svg>
                                             Reward Center
                                         </Link>
-                                        <Link to={process.env.PUBLIC_URL +"/sign-in"} className="list-group-item list-group-item-action border-0 ">
+                                        <Link to={process.env.PUBLIC_URL +"/sign-in"} onClick={handleRemove} className="list-group-item list-group-item-action border-0 ">
                                             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" className="me-3">
                                                 <rect xmlns="http://www.w3.org/2000/svg" className="st0" width="24" height="24" style={{ fill: 'none' }} fill="none"></rect>
                                                 <path xmlns="http://www.w3.org/2000/svg" d="M20,4c0-1.104-0.896-2-2-2H6C4.896,2,4,2.896,4,4v16c0,1.104,0.896,2,2,2h12  c1.104,0,2-0.896,2-2V4z" style={{ fill: 'var(--primary-color)' }} data-st="fill:var(--chart-color4);"></path>
