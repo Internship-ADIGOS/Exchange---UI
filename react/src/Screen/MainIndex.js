@@ -81,10 +81,11 @@ function MainIndex(props) {
                     GotoChangeMenu={(val) => { GotoChangeMenu(val) }}
                 />
             }
-            {user && show && <Alert variant='success'>
+            {show &&
+              <Alert variant='success'>
                  Succesfully Logged In!
                 <button style={{float:'right'}} type="button" className="btn-close" data-dismiss="alert" aria-label="Close" onClick={handleShow}></button>
-            </Alert>
+              </Alert>
             }
             <NewModal
                 show={modalopen}

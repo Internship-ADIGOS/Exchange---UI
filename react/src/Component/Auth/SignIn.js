@@ -6,6 +6,7 @@ import AuthRight from "./AuthRight";
 import { useNavigate } from "react-router-dom";
 import Alert from 'react-bootstrap/Alert';
 
+
 function Signin() {
      
     const navigate = useNavigate();
@@ -15,6 +16,10 @@ function Signin() {
     const [password, setPassword] = useState("")
     const [show, setShow] = useState(false)
 
+    //function  to close the alert
+    function handleClose(){
+        setShow(false)
+    }
 
     const handleLogin = (e) =>{
      
@@ -28,13 +33,21 @@ function Signin() {
             setShow(true)
             navigate(process.env.PUBLIC_URL + "/")
 
+        }).catch(err=>{
+            console.error(err);
+            setShow(true)
         })
     }
+
     return (<>
 
         <div className="body d-flex p-0 p-xl-5">
             <div className="container">
                 <div className="row g-3">
+                { show && <Alert variant='danger'>
+                 Invalid Credentials!
+                <button style={{float:'right'}} type="button" className="btn-close" data-dismiss="alert" aria-label="Close" onClick={handleClose}></button>
+            </Alert> }
                     <div className="col-lg-6 d-flex justify-content-center align-items-center auth-h100">
                         <div className="d-flex flex-column">
                             <h1>Account Login</h1>

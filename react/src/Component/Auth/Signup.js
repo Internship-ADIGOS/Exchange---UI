@@ -68,6 +68,7 @@ function Signup() {
         navigate(process.env.PUBLIC_URL + "/sign-in")
     }).catch(err=> {
         console.log(err)
+        
     })
 }
 
