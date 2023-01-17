@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route, Routes, useNavigate } from 'react-router-dom';
 import { onModalOpen, onChangeDarkMode, onChangeHighcontrast, OnchangeRTLmode } from '../Redux/Actions/Actions';
@@ -59,12 +59,20 @@ import Reward from './Reward/Reward';
 import SecurityPage from './SecurityPage/SecurityPage';
 import Identification from './Identification/Identification';
 import ReferalPage from './ReferalPage/ReferalPage';
+import { Alert } from 'react-bootstrap';
+
 
 function MainIndex(props) {
     const { modalopen, darkMode, highcontrast, rtlmode } = props.Mainreducer;
     const { activekey, GotoChangeMenu } = props;
     const navigate = useNavigate();
     const baseUrl = process.env.PUBLIC_URL;
+    const user = localStorage.getItem('token')
+    const [show, setShow] = useState(true)
+
+    function handleShow(){
+        setShow(false)
+    }
     return (
         <div className='main px-lg-4 px-md-4'>
             {activekey === "/chat" || activekey === "/documentation" ? "" :
@@ -72,6 +80,11 @@ function MainIndex(props) {
                     onModalOpen={(val) => { props.onModalOpen(true) }}
                     GotoChangeMenu={(val) => { GotoChangeMenu(val) }}
                 />
+            }
+            {user && show && <Alert variant='success'>
+                 Succesfully Logged In!
+                <button style={{marginLeft:28}} type="button" className="btn-close" data-dismiss="alert" aria-label="Close" onClick={handleShow}></button>
+            </Alert>
             }
             <NewModal
                 show={modalopen}
