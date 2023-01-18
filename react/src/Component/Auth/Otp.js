@@ -63,4 +63,4 @@ function Otp() {
     )
 }
 
-export default Verification;
+export default Otp;

@@ -55,6 +55,7 @@ function Signup() {
         phone: phone,
         email: email,
         password: password,
+        referral_id: ref
     }
 
  axios.post("http://167.99.86.45:3000/create",
