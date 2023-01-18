@@ -1,7 +1,34 @@
 import React from 'react';
 import P1 from '../../assets/images/profile_av.svg'
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+
 
 function UserDetailcard() {
+
+    const [data, setData] = useState([])
+
+    //function for the fetching the user data
+    const getUserDetails = () =>{
+        const token = window.localStorage.getItem('token')
+
+        const headers = {
+            "x-auth-token": token
+        }
+
+        axios.get("http://167.99.86.45:3000/getsingleuser", {headers})
+        .then(response=>{
+            console.log(response)
+            setData(response.data)
+        }).catch(error=>{
+            console.error(error)
+        })
+    }
+
+    useEffect(()=>{
+        getUserDetails()   
+    }, [])
+
     return (
         <div className="row g-3 mb-3">
             <div className="col-lg-12">
@@ -12,8 +39,8 @@ function UserDetailcard() {
                                 <div className="d-flex">
                                     <img className="avatar rounded-circle" src={P1}alt="profile"/>
                                         <div className="flex-fill ms-3">
-                                            <p className="mb-0"><span className="font-weight-bold">John	Quinn</span></p>
-                                            <small className="">Johnquinn@gmail.com</small>
+                                            <p className="mb-0"><span className="font-weight-bold">{data.first_name}</span></p>
+                                            <small className="">{data.email}</small>
                                         </div>
                                 </div>
                             </div>

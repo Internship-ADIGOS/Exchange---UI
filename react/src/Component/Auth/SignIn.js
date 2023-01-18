@@ -38,7 +38,6 @@ function Signin() {
             password: password
         }
         axios.post("http://167.99.86.45:3000/login", data).then(response=>{
-            setShow(true)
             navigate(process.env.PUBLIC_URL + "/")
             window.localStorage.setItem('token', response.data.token)
 

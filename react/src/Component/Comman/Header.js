@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import { Dropdown } from 'react-bootstrap';
 import flag from '../../assets/images/flag/GB.png';
 import Profile from '../../assets/images/profile_av.svg';
@@ -14,14 +14,14 @@ import F4 from '../../assets/images/flag/IT.png';
 import F5 from '../../assets/images/flag/RU.png';
 import QrCode from '../../assets/images/qr-code.png';
 import { Link } from 'react-router-dom';
-
+import axios from 'axios';
 
 function Header(props) {
     const { onModalOpen, GotoChangeMenu } = props;
     const [collapse, setCollapse] = useState(false);
     const [collapsebig, setCollapsebig] = useState(false);
     const [sidebarMini, setSidebarMini] = useState(false);
-
+    const [data, setData] = useState([])
     const closeCommanSidebar = () => {
         var sidebar = document.getElementById('commansidebar')
         if (sidebar) {
@@ -36,6 +36,28 @@ function Header(props) {
     function handleRemove(){
         window.localStorage.removeItem('token')
     }
+
+    //function for the fetching the user data
+    const getUserDetails = () =>{
+        const token = window.localStorage.getItem('token')
+
+        const headers = {
+            "x-auth-token": token
+        }
+
+        axios.get("http://167.99.86.45:3000/getsingleuser", {headers})
+        .then(response=>{
+            console.log(response)
+            setData(response.data)
+        }).catch(error=>{
+            console.error(error)
+        })
+    }
+
+    useEffect(()=>{
+     getUserDetails()   
+    }, [])
+
     return (
         <div className="header">
             <nav className="navbar py-4">
@@ -167,8 +189,8 @@ function Header(props) {
                                         <div className="d-flex py-1">
                                             <img className="avatar rounded-circle" src={Profile} alt="profile" />
                                             <div className="flex-fill ms-3">
-                                                <p className="mb-0"><span className="font-weight-bold">John	Quinn</span></p>
-                                                <small className="">Johnquinn@gmail.com</small>
+                                                <p className="mb-0"><span className="font-weight-bold">{data.first_name}</span></p>
+                                                <small className="">{data.email}</small>
                                             </div>
                                         </div>
 
