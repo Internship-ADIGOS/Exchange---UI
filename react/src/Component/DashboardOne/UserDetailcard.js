@@ -46,7 +46,7 @@ function UserDetailcard() {
                             </div>
                             <div className="col-md-6 col-lg-6 col-xl-3">
                                 <div className="d-flex flex-column">
-                                    <span className="text-muted mb-1">User ID:164647708</span>
+                                    <span className="text-muted mb-1">User ID: {data.user_id}</span>
                                     <span className="small text-muted flex-fill text-truncate">Last login time 2021-09-29 10:56:22</span>
                                 </div>
                             </div>
