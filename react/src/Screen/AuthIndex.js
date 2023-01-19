@@ -10,6 +10,7 @@ import ForgotPassword from "../Component/Auth/ForgotPassword";
 import Verification from "../Component/Auth/Verification";
 import ErrorPage from "../Component/Auth/ErrorPage";
 import { sendAlert } from "../context/UserContext";
+import { useState } from "react";
 
 function AuthIndex(props) {
     const { modalopen, darkMode, highcontrast, rtlmode } = props.Mainreducer;
@@ -35,9 +36,9 @@ function AuthIndex(props) {
                 <sendAlert.Provider value={{alert, setAlert}}>
                 <Route exact path={baseUrl+'/sign-in'} element={<Signin />} />
                 <Route exact path={baseUrl+"/sign-up"} element={<Signup />} />
+                </sendAlert.Provider>
                 <Route exact path={baseUrl+"/forgot-password"} element={<ForgotPassword />} />
                 <Route exact path={baseUrl+"/verification"} element={<Verification />} />
-                </sendAlert.Provider>
                 <Route exact path={baseUrl+"/404page"} element={<ErrorPage />} />
             </Routes>
         </div>

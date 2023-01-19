@@ -16,6 +16,7 @@ function Signin() {
     const [password, setPassword] = useState("")
     const [show, setShow] = useState(false)
     const [showLog, setShowLog] = useState(false)
+    
 
     //function  to close the alert
     function handleClose(){
@@ -57,7 +58,7 @@ function Signin() {
             <div className="container">
                 <div className="row g-3">
                     
-                { && <Alert variant='success'>
+                {alert && <Alert variant='success'>
                  Succesfully Registered!
                 <button style={{float:'right'}} type="button" className="btn-close" data-dismiss="alert" aria-label="Close" onClick={handleClose}></button>
             </Alert> }
