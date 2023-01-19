@@ -60,6 +60,7 @@ import SecurityPage from './SecurityPage/SecurityPage';
 import Identification from './Identification/Identification';
 import ReferalPage from './ReferalPage/ReferalPage';
 import { Alert } from 'react-bootstrap';
+import Verification from '../Component/Auth/Verification';
 
 
 function MainIndex(props) {
@@ -68,11 +69,9 @@ function MainIndex(props) {
     const navigate = useNavigate();
     const baseUrl = process.env.PUBLIC_URL;
 
-    const [show, setShow] = useState(false) //initializing by false
     const token = window.localStorage.getItem("token")
-    if(token){
-        setShow(true)
-    }
+    const [show, setShow] = useState(token ? true: false) //initializing by false
+
     function handleShow(){
         setShow(false)
     }
@@ -102,6 +101,7 @@ function MainIndex(props) {
             <div className="body d-flex py-3 ">
                 <Routes>
                     <Route exact path={baseUrl + '/'} element={<Dashboard />} />
+                    <Route exact path={baseUrl + "/verification"} element={<Verification />} />
                     <Route exact path={baseUrl + '/exchange'} element={<Exchange />} />
                     <Route exact path={baseUrl + '/market'} element={<Market />} />
                     <Route exact path={baseUrl + '/ico'} element={<Ico />} />

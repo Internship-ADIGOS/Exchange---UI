@@ -56,6 +56,11 @@ function Signin() {
         <div className="body d-flex p-0 p-xl-5">
             <div className="container">
                 <div className="row g-3">
+                    
+                { && <Alert variant='success'>
+                 Succesfully Registered!
+                <button style={{float:'right'}} type="button" className="btn-close" data-dismiss="alert" aria-label="Close" onClick={handleClose}></button>
+            </Alert> }
                 { show && <Alert variant='danger'>
                  Invalid Credentials!
                 <button style={{float:'right'}} type="button" className="btn-close" data-dismiss="alert" aria-label="Close" onClick={handleClose}></button>

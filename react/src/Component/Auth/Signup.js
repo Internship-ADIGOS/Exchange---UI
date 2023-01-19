@@ -18,6 +18,7 @@ function Signup() {
     const [conf_pass, setConf_pass] = useState("")
     const [ref, setRef] = useState("")
 
+    const [sendAlert, setsendAlert] = useState(false)
 
     const checkValidation = (e) => {
         const conf_pass = e.target.value
@@ -70,6 +71,7 @@ function Signup() {
         // alert("You have successfully register")
         const ans = response.data
         navigate(process.env.PUBLIC_URL + "/sign-in")
+        sendAlert(true)
     }).catch(err=> {
         console.log(err)
         
