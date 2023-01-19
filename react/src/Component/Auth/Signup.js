@@ -48,7 +48,11 @@ function Signup() {
     const registerUser = (e) => {
         
     e.preventDefault()
-       
+    
+    // const headers = {
+    //     "Content-Type":"Application/json",
+    //     withCredentials: true
+    // }
     const data = {
         first_name: first_name,
         last_name: last_name,

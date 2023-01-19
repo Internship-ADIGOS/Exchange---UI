@@ -69,8 +69,8 @@ function MainIndex(props) {
     const baseUrl = process.env.PUBLIC_URL;
 
     const [show, setShow] = useState(false) //initializing by false
-    const status = window.localStorage.getItem("status")
-    if(status){
+    const token = window.localStorage.getItem("token")
+    if(token){
         setShow(true)
     }
     function handleShow(){

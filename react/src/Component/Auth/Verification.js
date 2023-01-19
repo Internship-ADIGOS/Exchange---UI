@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 function Verification() {
      
     const navigate = useNavigate()
-    const [otp, setOtp] = useState(new Array(6).fill(""));
+    const [otp, setOtp] = useState(new Array(6).fill("-"));
 
     const email = window.localStorage.getItem('email')
     
@@ -40,15 +40,11 @@ function Verification() {
         ).then(response => {
         console.log(response);
         //store the status in localstorage
-        window.localstorage.setItem("status", response.data.status)
+        window.localstorage.setItem("token", response.data.token)
         //redirecting to the homepage
         navigate(process.env.PUBLIC_URL + "/")
           
         })
-
-
-                
-
 
     }
     return (
@@ -63,16 +59,16 @@ function Verification() {
                                 <div className="card mt-4 mb-3" style={{ maxWidth: '30rem' }} >
                                     <div className="card-body p-4">
                                         <form className="row g-1">
-                                            {otp.map((data, index)=>{
+                                            {otp.map((otp, index)=>{
                                                 return(
-                                                <div className="col">
-                                                <div className="mb-2">
+                                                <div className="col" key={index}>
+                                                <div className="mb-2" key={index}>
                                                 <input 
                                                 type="text"
                                                 className="form-control form-control-lg text-center"
                                                 maxLength="1"
                                                 key={index}
-                                                value={data}
+                                                value={otp}
                                                 onChange={e => handleChange(e.target, index)}
                                                 onFocus={e => e.target.select()}
                                                 />

@@ -35,8 +35,13 @@ function Signin() {
             password: password
         }
         axios.post("http://167.99.86.45:3000/login", data).then(response=>{
-            navigate(process.env.PUBLIC_URL + "/verification")
-            window.localStorage.setItem('email', response.data.email.JSON.stringify())
+
+            console.log(response.data)
+            if(response.data.success == true){
+                //if status is 1 then the email into the localstorage 
+                window.localStorage.setItem('email', email)
+                navigate(process.env.PUBLIC_URL + "/verification")
+            }
 
         }).catch(err=>{
             console.error(err);
