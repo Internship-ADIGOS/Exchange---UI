@@ -15,8 +15,7 @@ function Signin() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [show, setShow] = useState(false)
-    const [showLog, setShowLog] = useState(true)
-
+    const [showLog, setShowLog] = useState(false)
 
     //function  to close the alert
     function handleClose(){

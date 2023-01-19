@@ -68,8 +68,11 @@ function MainIndex(props) {
     const navigate = useNavigate();
     const baseUrl = process.env.PUBLIC_URL;
 
-    const [show, setShow] = useState(true)
-
+    const [show, setShow] = useState(false) //initializing by false
+    const status = window.localStorage.getItem("status")
+    if(status){
+        setShow(true)
+    }
     function handleShow(){
         setShow(false)
     }

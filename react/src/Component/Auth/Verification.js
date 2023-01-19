@@ -1,14 +1,19 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import AuthRight from "./AuthRight";
 import { useState } from "react";
 import { AccordionCollapse } from "react-bootstrap";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Verification() {
-
+     
+    const navigate = useNavigate()
     const [otp, setOtp] = useState(new Array(6).fill(""));
 
+    const email = window.localStorage.getItem('email')
+    
+    //api
     const handleChange = (element, index) =>{
       if(isNaN(element.value)) return false;
 
@@ -27,9 +32,19 @@ function Verification() {
         "Content-Type":"application/json"
        }
        const data = {
-        "otp":""
+        "otp":otp,
+        "email":email
        }
-        axios.post("http://167.99.86.45:3000/verify_otp")
+        axios.post("http://167.99.86.45:3000/verify_otp",
+         data
+        ).then(response => {
+        console.log(response);
+        //store the status in localstorage
+        window.localstorage.setItem("status", response.data.status)
+        //redirecting to the homepage
+        navigate(process.env.PUBLIC_URL + "/")
+          
+        })
 
 
                 
