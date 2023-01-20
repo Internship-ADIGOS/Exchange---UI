@@ -12,7 +12,7 @@ function Verification() {
     const navigate = useNavigate()
     const [otp, setOtp] = useState(new Array(6).fill("-"));
     const [show, setShow] = useState(false)
-
+    const [alert, setAlert] = useState(true)
     
     //api
     const handleChange = (element, index) => {
@@ -25,12 +25,15 @@ function Verification() {
             element.nextSibling.focus();
         }
     }
+
+    //getting the email from localstorage
+    const email = window.localStorage.getItem('email')
+    
     //function for submitting the otp api
     function handleSubmit(e) {
         
         e.preventDefault()
         //getting the email from the localstorage
-        const email = window.localStorage.getItem('email')
        
         const data = {
             "otp": String(otp.join("")),
@@ -60,6 +63,12 @@ function Verification() {
     function handleClose(){
         setShow(false)
     }
+
+    //function for closing the alert
+    function handleCloseAlert(){
+        setAlert(false)
+    }
+
     return (
         <>
             <div className="body d-flex p-0 p-xl-5">
@@ -67,6 +76,10 @@ function Verification() {
                     <div className="row g-3">
                         {show && <Alert variant='danger'>
                             Invalid Otp!
+                            <button style={{ float: 'right' }} type="button" className="btn-close" data-dismiss="alert" aria-label="Close" onClick={handleClose}></button>
+                        </Alert>}
+                        {email && alert && <Alert variant='success'>
+                            Otp sent to your email!
                             <button style={{ float: 'right' }} type="button" className="btn-close" data-dismiss="alert" aria-label="Close" onClick={handleClose}></button>
                         </Alert>}
                         <div className="col-lg-6 d-flex justify-content-center align-items-center auth-h100">

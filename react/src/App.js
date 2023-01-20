@@ -62,6 +62,8 @@ function App(props) {
     </div>
   );
 }
+
+
 const mapStateToProps = ({ Mainreducer }) => ({
   Mainreducer
 })

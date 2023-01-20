@@ -9,14 +9,12 @@ import Signup from "../Component/Auth/Signup";
 import ForgotPassword from "../Component/Auth/ForgotPassword";
 import Verification from "../Component/Auth/Verification";
 import ErrorPage from "../Component/Auth/ErrorPage";
-import { sendAlert } from "../context/UserContext";
 import { useState } from "react";
 
 function AuthIndex(props) {
     const { modalopen, darkMode, highcontrast, rtlmode } = props.Mainreducer;
     const baseUrl =process.env.PUBLIC_URL;
 
-    const [alert, setAlert] = useState();
 
     return (
         <div className="main p-2 py-3 p-xl-5">
@@ -33,10 +31,8 @@ function AuthIndex(props) {
                 OnchangeRTLmode={() => { props.OnchangeRTLmode(rtlmode === 'rtl_mode' ? true : false) }}
             />
             <Routes>
-                <sendAlert.Provider value={{alert, setAlert}}>
                 <Route exact path={baseUrl+'/sign-in'} element={<Signin />} />
                 <Route exact path={baseUrl+"/sign-up"} element={<Signup />} />
-                </sendAlert.Provider>
                 <Route exact path={baseUrl+"/forgot-password"} element={<ForgotPassword />} />
                 <Route exact path={baseUrl+"/verification"} element={<Verification />} />
                 <Route exact path={baseUrl+"/404page"} element={<ErrorPage />} />

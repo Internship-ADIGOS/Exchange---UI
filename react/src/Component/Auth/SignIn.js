@@ -58,10 +58,11 @@ function Signin() {
             <div className="container">
                 <div className="row g-3">
                     
-                {alert && <Alert variant='success'>
+                {/* {alert && <Alert variant='success'>
                  Succesfully Registered!
                 <button style={{float:'right'}} type="button" className="btn-close" data-dismiss="alert" aria-label="Close" onClick={handleClose}></button>
-            </Alert> }
+            </Alert> } */}
+
                 { show && <Alert variant='danger'>
                  Invalid Credentials!
                 <button style={{float:'right'}} type="button" className="btn-close" data-dismiss="alert" aria-label="Close" onClick={handleClose}></button>
