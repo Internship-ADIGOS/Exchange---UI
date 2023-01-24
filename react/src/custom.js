@@ -1,3 +1,4 @@
+import Spot from "./Component/Exchange/Spot";
 obj   = JSON.parse(BDTASK.phrase());
 theme = JSON.parse(BDTASK.theme());
 $(function($){

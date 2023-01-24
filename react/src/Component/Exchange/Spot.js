@@ -24,15 +24,15 @@ function Spot() {
                                     <span className="small text-muted">Avbl</span>
                                     <span className="">310.800000 USDT</span>
                                 </div>
-                                <form>
+                                <form id="buyform">
                                     <div className="input-group mb-3">
                                         <span className="input-group-text">Price</span>
-                                        <input type="text" className="form-control" onChange={()=>{}}/>
+                                        <input type="text" className="form-control" id="buypricing" onChange={()=>{}}/>
                                             <span className="input-group-text">USDT</span>
                                     </div>
                                     <div className="input-group mb-3">
                                         <span className="input-group-text">Amount</span>
-                                        <input type="text" className="form-control" onChange={()=>{}}/>
+                                        <input type="text" className="form-control" id="buyamount" onChange={()=>{}}/>
                                             <span className="input-group-text">BTC</span>
                                     </div>
                                     <div className="input-group mb-3">
