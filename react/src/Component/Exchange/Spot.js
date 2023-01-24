@@ -58,14 +58,19 @@ function Spot() {
                                     <span className="small text-muted">Avbl</span>
                                     <span className="">0.0000000 BTC</span>
                                 </div>
-                                <form>
+                                {/* //from here limit sell btc is starting */}
+                                <form id="sellform">
                                     <div className="input-group mb-3">
                                         <span className="input-group-text">Price</span>
-                                        <input type="text" className="form-control" onChange={()=>{}}/>
+                                        <input type="text" className="form-control"
+                                        id="sellpricing"
+                                        onChange={()=>{}}/>
                                             <span className="input-group-text">USDT</span>
                                     </div>
                                     <div className="input-group mb-3">
-                                        <span className="input-group-text">Amount</span>
+                                        <span className="input-group-text"
+                                        id="sellamount"
+                                        >Amount</span>
                                         <input type="text" className="form-control" onChange={()=>{}}/>
                                             <span className="input-group-text">BTC</span>
                                     </div>
@@ -213,10 +218,12 @@ function Spot() {
                                     <span className="small text-muted">Avbl</span>
                                     <span className="">0.0000000 BTC</span>
                                 </div>
-                                <form>
+                                <form id="sellform">
                                     <div className="input-group mb-3">
                                         <span className="input-group-text">Stop</span>
-                                        <input type="text" className="form-control" onChange={()=>{}}/>
+                                        <input type="text" className="form-control" 
+                                        id="sellpricing"
+                                        onChange={()=>{}}/>
                                             <span className="input-group-text">USDT</span>
                                     </div>
                                     <div className="input-group mb-3">
