@@ -7,7 +7,7 @@ const AuthCode = () => {
      <h1>Auth Code:</h1>
      <h2>Please Enter here:</h2>
      <div style={{"display":'flex', "justifyContent":"center"}}>
-     <ReactInputVerificationCode  />
+     <ReactInputVerificationCode  length={6} placeholder={"-"} />
      </div>
      <div style={{"margin":"2vw", "display":'flex', "justifyContent":"center"}}>
      <button>Authenticate</button>
