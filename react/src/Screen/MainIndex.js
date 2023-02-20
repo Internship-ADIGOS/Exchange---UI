@@ -62,6 +62,7 @@ import ReferalPage from './ReferalPage/ReferalPage';
 import { Alert } from 'react-bootstrap';
 import Verification from '../Component/Auth/Verification';
 import AuthCode from '../Component/Auth/AuthCode';
+import CapcthaSlider from '../Component/Auth/CapcthaSlider';
 
 
 function MainIndex(props) {
@@ -104,6 +105,7 @@ function MainIndex(props) {
                     <Route exact path={baseUrl + '/'} element={<Dashboard />} />
                     <Route exact path={baseUrl + "/verification"} element={<Verification />} />
                     <Route exact path={baseUrl + "/authcode"} element={<AuthCode />} />
+                    <Route exact path={baseUrl + "/captcha"} element={<CapcthaSlider />} />
                     <Route exact path={baseUrl + '/exchange'} element={<Exchange />} />
                     <Route exact path={baseUrl + '/market'} element={<Market />} />
                     <Route exact path={baseUrl + '/ico'} element={<Ico />} />
