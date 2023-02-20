@@ -19,6 +19,7 @@ function ProfilePage() {
                     <div className='col-xl-8 col-lg-7 col-md-12'>
                         <ProfileSetting />
                         <AuthenticationDetail />
+                        
                     </div>
 
                 </div>
