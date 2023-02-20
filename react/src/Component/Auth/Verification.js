@@ -6,6 +6,7 @@ import { AccordionCollapse } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Alert } from "react-bootstrap";
+import ReactInputVerificationCode from "react-input-verification-code";
 
 function Verification() {
 
@@ -89,7 +90,7 @@ function Verification() {
                                 <div className="card mt-4 mb-3" style={{ maxWidth: '30rem' }} >
                                     <div className="card-body p-4">
                                         <form className="row g-1">
-                                            {otp.map((otp, index) => {
+                                            {/* {otp.map((otp, index) => {
                                                 return (
                                                     <div className="col" key={index}>
                                                         <div className="mb-2" key={index}>
@@ -105,7 +106,8 @@ function Verification() {
                                                         </div>
                                                     </div>
                                                 )
-                                            })}
+                                            })} */}
+                                         <ReactInputVerificationCode  length={6} placeholder={"-"} value={otp} onChange={e=> handleChange(e.target)}/>
 
                                             <div className="col-12 text-center mt-4">
                                                 <button type="submit" className="btn btn-primary text-uppercase py-2 fs-5 w-100" onClick={handleSubmit}>Verify my account</button>
@@ -124,5 +126,5 @@ function Verification() {
         </>
     )
 }
-
+    
 export default Verification;

@@ -61,6 +61,7 @@ import Identification from './Identification/Identification';
 import ReferalPage from './ReferalPage/ReferalPage';
 import { Alert } from 'react-bootstrap';
 import Verification from '../Component/Auth/Verification';
+import AuthCode from '../Component/Auth/AuthCode';
 
 
 function MainIndex(props) {
@@ -102,6 +103,7 @@ function MainIndex(props) {
                 <Routes>
                     <Route exact path={baseUrl + '/'} element={<Dashboard />} />
                     <Route exact path={baseUrl + "/verification"} element={<Verification />} />
+                    <Route exact path={baseUrl + "/authcode"} element={<AuthCode />} />
                     <Route exact path={baseUrl + '/exchange'} element={<Exchange />} />
                     <Route exact path={baseUrl + '/market'} element={<Market />} />
                     <Route exact path={baseUrl + '/ico'} element={<Ico />} />
