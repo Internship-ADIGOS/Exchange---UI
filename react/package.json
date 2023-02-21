@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "/template/cryptoon/react/",
   "dependencies": {
+    "@alex_xu/react-slider-vertify": "^1.2.0",
     "@fullcalendar/daygrid": "^5.11.0",
     "@fullcalendar/interaction": "^5.11.0",
     "@fullcalendar/react": "^5.11.1",
@@ -26,7 +27,6 @@
     "react-router": "^6.2.2",
     "react-router-dom": "^6.2.2",
     "react-scripts": "5.0.1",
-    "react-slide-captcha": "^1.0.1",
     "react-syntax-highlighter": "^15.5.0",
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.1",

@@ -1,77 +1,82 @@
 import axios from "axios";
-import {React, useState, useEffect} from "react";
+import { React, useState, useEffect } from "react";
 import { Dropdown, Nav, Tab } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import AuthRight from "./AuthRight";
 import { useNavigate } from "react-router-dom";
 import Alert from 'react-bootstrap/Alert';
+import { Vertify } from "@alex_xu/react-slider-vertify";
+import Modal from "react-bootstrap/Modal"
+
 
 
 function Signin() {
-     
+
     const navigate = useNavigate();
-     
+
     // initial state
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [show, setShow] = useState(false)
     const [showLog, setShowLog] = useState(false)
-    
+    const [visible, setVisible] = useState(false)
+
 
     //function  to close the alert
-    function handleClose(){
+    function handleClose() {
         setShow(false)
     }
- 
+    //function for showing the captcha 
+    function handleCaptcha(e) {
+        e.preventDefault()
+        setVisible(!visible)
+    }
     //function to close the log alert 
-    function handleLog(){
+    function handleLog() {
         setShowLog(false)
     }
-    const handleLogin = (e) =>{
-     
+    const handleLogin = (e) => {
         e.preventDefault()
 
         const data = {
             email: email,
             password: password
         }
-        axios.post("http://167.99.86.45:3000/login", data).then(response=>{
+        axios.post("http://167.99.86.45:3000/login", data).then(response => {
 
             console.log(response.data)
-            if(response.data.success == true){
+            if (response.data.success == true) {
                 //if status is 1 then the email into the localstorage 
                 window.localStorage.setItem('email', email)
                 navigate(process.env.PUBLIC_URL + "/verification")
             }
 
-        }).catch(err=>{
+        }).catch(err => {
             console.error(err);
             setShow(true)
         })
     }
-
-    
 
     return (<>
 
         <div className="body d-flex p-0 p-xl-5">
             <div className="container">
                 <div className="row g-3">
-                    
-                {/* {alert && <Alert variant='success'>
+
+                    {/* {alert && <Alert variant='success'>
                  Succesfully Registered!
                 <button style={{float:'right'}} type="button" className="btn-close" data-dismiss="alert" aria-label="Close" onClick={handleClose}></button>
             </Alert> } */}
 
-                { show && <Alert variant='danger'>
-                 Invalid Credentials!
-                <button style={{float:'right'}} type="button" className="btn-close" data-dismiss="alert" aria-label="Close" onClick={handleClose}></button>
-            </Alert> }
-                {showLog && <Alert variant='success'>
-                 Succesfully Logged Out!
-                <button style={{float:'right'}} type="button" className="btn-close" data-dismiss="alert" aria-label="Close" onClick={handleLog}></button>
-            </Alert> }
-        
+                    {show && <Alert variant='danger'>
+                        Invalid Credentials!
+                        <button style={{ float: 'right' }} type="button" className="btn-close" data-dismiss="alert" aria-label="Close" onClick={handleClose}></button>
+                    </Alert>}
+                    {showLog && <Alert variant='success'>
+                        Succesfully Logged Out!
+                        <button style={{ float: 'right' }} type="button" className="btn-close" data-dismiss="alert" aria-label="Close" onClick={handleLog}></button>
+                    </Alert>}
+
                     <div className="col-lg-6 d-flex justify-content-center align-items-center auth-h100">
                         <div className="d-flex flex-column">
                             <h1>Account Login</h1>
@@ -85,22 +90,41 @@ function Signin() {
                                     <Tab.Pane className="tab-pane fade " id="Email" eventKey="first">
                                         <div className="card">
                                             <div className="card-body p-4">
-                                                <form onSubmit={handleLogin}>
+                                                <form onSubmit={(e)=>{handleCaptcha(e)}}>
                                                     <div className="mb-3">
                                                         <label className="form-label fs-6">Email address</label>
-                                                        <input type="email" className="form-control" 
-                                                        value={email}
-                                                        onChange={(e)=> setEmail(e.target.value)}
+                                                        <input type="email" className="form-control"
+                                                            value={email}
+                                                            onChange={(e) => setEmail(e.target.value)}
                                                         />
                                                     </div>
                                                     <div className="mb-3">
                                                         <label className="form-label fs-6">Password</label>
                                                         <input type="password" className="form-control"
-                                                        value={password}
-                                                        onChange={(e)=> setPassword(e.target.value)}
+                                                            value={password}
+                                                            onChange={(e) => setPassword(e.target.value)}
                                                         />
                                                     </div>
-                                                    <button type="submit" className="btn btn-primary text-uppercase py-2 fs-5 w-100 mt-2">log in</button>
+                                                    <button type="submit" className="btn btn-primary text-uppercase py-2 fs-5 w-100 mt-2"
+                                                        data-toggle="modal" data-target="#exampleModalLive"
+                                                    >log in</button>
+                                                <Modal show={visible} onHide={() => { setVisible(false) }}>
+                                                    <Modal.Header>
+                                                        <h5 className="modal-title" id="exampleModalLiveLabel">Modal title</h5>
+                                                        <button type="button" className="btn-close" onClick={() => { setVisible(false) }}  ></button>
+                                                    </Modal.Header>
+
+                                                    <Modal.Body>
+                                                        <Vertify
+                                                            width={320}
+                                                            height={160}
+                                                            visible={visible}
+                                                            onSuccess={() => handleLogin()}
+                                                            onFail={() => alert('fail')}
+                                                            onRefresh={() => alert('refresh')}
+                                                        />
+                                                    </Modal.Body>
+                                                </Modal>
                                                 </form>
                                             </div>
                                         </div>
