@@ -1,72 +1,63 @@
 import React from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import AuthRight from "./AuthRight";
 import { useState } from "react";
-import { AccordionCollapse } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Alert } from "react-bootstrap";
-import ReactInputVerificationCode from "react-input-verification-code";
+
 
 function Verification() {
 
     const navigate = useNavigate()
-    const [otp, setOtp] = useState(new Array(6).fill("-"));
+    const [otp, setOtp] = useState("");
     const [show, setShow] = useState(false)
     const [alert, setAlert] = useState(true)
-    
-    //api
-    const handleChange = (element, index) => {
-        if (isNaN(element.value)) return false;
-        
-        setOtp([...otp.map((d, idx) => (idx === index ? element.value : d))])
 
-        //focus on the next input 
-        if (element.nextSibling) {
-            element.nextSibling.focus();
-        }
-    }
 
     //getting the email from localstorage
     const email = window.localStorage.getItem('email')
-    
+
     //function for submitting the otp api
     function handleSubmit(e) {
-        
+
         e.preventDefault()
         //getting the email from the localstorage
-       
+
         const data = {
-            "otp": String(otp.join("")),
+            "otp": otp,
             "email": email
         }
         // console.log(String(otp.join("")))
         axios.post("http://167.99.86.45:3000/verify_otp", data)
-        .then(response => {
-            console.log(response.data);
-            if(response.data.status === 1){
-                //store the status in localstorage
-                window.localStorage.setItem('token', response.data.token)
-                //redirecting to the homepage
-                navigate(process.env.PUBLIC_URL + "/")
+            .then(response => {
+                console.log(response.data);
+                if (response.data.status === 1) {
+                    //store the status in localstorage
+                    window.localStorage.setItem('token', response.data.token)
+                    //redirecting to the homepage
+                    navigate(process.env.PUBLIC_URL + "/")
 
-            }else{
-                setShow(true)
-            }
+                } else {
+                    setShow(true)
+                }
 
-        }).catch(err => {
-            console.error(err)
-        })
+            }).catch(err => {
+                console.error(err)
+            })
 
     }
 
+    function handlepata(){
+        console.log(otp)
+    }
     //function for closing the button
-    function handleClose(){
+    function handleClose() {
         setShow(false)
     }
 
     //function for closing the alert
-    function handleCloseAlert(){
+    function handleCloseAlert() {
         setAlert(false)
     }
 
@@ -87,28 +78,20 @@ function Verification() {
                             <div className="d-flex flex-column">
                                 <h1>Verification</h1>
                                 <span className="text-muted">We sent a verification code to your email or phone. <br />Enter the code from the field below.</span>
-                                <div className="card mt-4 mb-3" style={{ maxWidth: '30rem' }} >
+                                <div className="card mt-4 mb-3" style={{ maxWidth: '20rem' }} >
                                     <div className="card-body p-4">
                                         <form className="row g-1">
-                                            {/* {otp.map((otp, index) => {
-                                                return (
-                                                    <div className="col" key={index}>
-                                                        <div className="mb-2" key={index}>
-                                                            <input
-                                                                type="text"
-                                                                className="form-control form-control-lg text-center"
-                                                                maxLength="1"
-                                                                key={index}
-                                                                value={otp}
-                                                                onChange={e => handleChange(e.target, index)}
-                                                                onFocus={e => e.target.select()}
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                )
-                                            })} */}
-                                         <ReactInputVerificationCode  length={6} placeholder={"-"} value={otp} onChange={e=> handleChange(e.target)}/>
-
+                                            <div className="col">
+                                                <div className="mb-2">
+                                                    <input
+                                                        type="text"
+                                                        className="form-control form-control-lg text-center"
+                                                        maxLength="6"
+                                                        value={otp}
+                                                        onChange={e => setOtp(e.target.value)}
+                                                    />
+                                                </div>
+                                            </div>
                                             <div className="col-12 text-center mt-4">
                                                 <button type="submit" className="btn btn-primary text-uppercase py-2 fs-5 w-100" onClick={handleSubmit}>Verify my account</button>
                                             </div>
@@ -126,5 +109,5 @@ function Verification() {
         </>
     )
 }
-    
+
 export default Verification;

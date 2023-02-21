@@ -119,8 +119,8 @@
                     height={160}
                     visible={visible}
                     onSuccess={() => handleLogin()}
-                    onFail={() => alert('fail')}
-                    onRefresh={() => alert('refresh')}
+                    onFail={() => window.location.reload()}
+                   
                 />
             </Modal.Body>
         </Modal>
