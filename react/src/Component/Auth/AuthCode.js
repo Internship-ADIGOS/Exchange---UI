@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router'
 
 const AuthCode = () => {
 
+ const navigate = useNavigate()
   //intergating the g_auth verification here
  function getVerified(e){
  if(!e.includes("-")){
@@ -14,13 +15,8 @@ const AuthCode = () => {
   }).then(response => {
     //storing the auth token into the localstorage
     window.localStorage.setItem('token', response.data.token)
-
-    //storing the status to the localstorage
-    window.localStorage.setItem("status", response.data.status)
-
     //navigating to the homepage
-    useNavigate(process.env.PUBLIC_URL + "/")
-
+    navigate(process.env.PUBLIC_URL + "/")
 
   })
  }

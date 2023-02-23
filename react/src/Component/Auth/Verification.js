@@ -15,13 +15,16 @@ function Verification() {
     const [alert, setAlert] = useState(true)
 
 
+    //fetching the email from the localstorage
+    const email = window.localStorage.getItem("email")
+
     //function for submitting the otp api
     function handleSubmit(e) {
         if (!e.includes("-")) {
 
             //getting the email from the localstorage
             axios.post("http://167.99.86.45:3000/verify_otp", {
-                email: window.localStorage.getItem("email"),
+                email: email,
                 otp: e
 
             }).then(response => {
@@ -65,7 +68,7 @@ function Verification() {
                         </Alert>}
                         {email && alert && <Alert variant='success'>
                             Otp sent to your email!
-                            <button style={{ float: 'right' }} type="button" className="btn-close" data-dismiss="alert" aria-label="Close" onClick={handleClose}></button>
+                            <button style={{ float: 'right' }} type="button" className="btn-close" data-dismiss="alert" aria-label="Close" onClick={handleCloseAlert}></button>
                         </Alert>}
                         <div className="col-lg-6 d-flex justify-content-center align-items-center auth-h100">
                             <div className="d-flex flex-column">
