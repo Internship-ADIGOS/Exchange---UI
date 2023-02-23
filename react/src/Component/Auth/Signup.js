@@ -66,9 +66,7 @@ function Signup() {
     data
     ).then(response => {
         console.log("Succesfully registered")
-        // navigate(process.env.PUBLIC_URL + "/sign-in")
-        // alert("You have successfully register")
-        const ans = response.data
+        window.localStorage.setItem("status",  response.data.status)
         navigate(process.env.PUBLIC_URL + "/sign-in")
     }).catch(err=> {
         console.log(err)

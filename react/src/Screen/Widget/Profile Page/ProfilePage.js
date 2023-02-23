@@ -28,7 +28,7 @@ function ProfilePage() {
 
     //function for verifying the gauth code
     function verify_gauth(){
-         axios.post("http://localhost:5000/verify_gauth", {
+         axios.post("http://167.99.86.45:3000/verify_gauth", {
            email: window.localStorage.getItem("email"),
            code: code
          }).then(response => {
@@ -56,7 +56,7 @@ function ProfilePage() {
                     
                     <Modal show={visible} onHide={() => { setVisible(false) }}>
                         <Modal.Header>
-                            <h5 className="modal-title" id="exampleModalLiveLabel">Modal title</h5>
+                            <h5 className="modal-title" id="exampleModalLiveLabel">Google Two Factor Authentication</h5>
                             <button type="button" className="btn-close" onClick={() => { setVisible(false) }}></button>
                         </Modal.Header>
                         <Modal.Body className=""> 

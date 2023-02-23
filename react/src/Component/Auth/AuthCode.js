@@ -9,7 +9,7 @@ const AuthCode = () => {
   //intergating the g_auth verification here
  function getVerified(e){
  if(!e.includes("-")){
-  axios.post("http://localhost:5000/verify_gauth", {
+  axios.post("http://167.99.86.45:3000/verify_gauth", {
     email: window.localStorage.getItem("email"),
     code: e
   }).then(response => {
