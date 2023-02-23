@@ -5,32 +5,26 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Alert } from "react-bootstrap";
+import ReactInputVerificationCode from "react-input-verification-code";
 
 
 function Verification() {
 
     const navigate = useNavigate()
-    const [otp, setOtp] = useState("");
     const [show, setShow] = useState(false)
     const [alert, setAlert] = useState(true)
 
 
-    //getting the email from localstorage
-    const email = window.localStorage.getItem('email')
-
     //function for submitting the otp api
     function handleSubmit(e) {
+        if (!e.includes("-")) {
 
-        e.preventDefault()
-        //getting the email from the localstorage
+            //getting the email from the localstorage
+            axios.post("http://167.99.86.45:3000/verify_otp", {
+                email: window.localStorage.getItem("email"),
+                otp: e
 
-        const data = {
-            "otp": otp,
-            "email": email
-        }
-        // console.log(String(otp.join("")))
-        axios.post("http://167.99.86.45:3000/verify_otp", data)
-            .then(response => {
+            }).then(response => {
                 console.log(response.data);
                 if (response.data.status === 1) {
                     //store the status in localstorage
@@ -45,12 +39,11 @@ function Verification() {
             }).catch(err => {
                 console.error(err)
             })
+        }
+
 
     }
-
-    function handlepata(){
-        console.log(otp)
-    }
+    
     //function for closing the button
     function handleClose() {
         setShow(false)
@@ -78,23 +71,18 @@ function Verification() {
                             <div className="d-flex flex-column">
                                 <h1>Verification</h1>
                                 <span className="text-muted">We sent a verification code to your email or phone. <br />Enter the code from the field below.</span>
-                                <div className="card mt-4 mb-3" style={{ maxWidth: '20rem' }} >
+                                <div className="card mt-4 mb-3" style={{ maxWidth: '40rem' }} >
                                     <div className="card-body p-4">
                                         <form className="row g-1">
                                             <div className="col">
                                                 <div className="mb-2">
-                                                    <input
-                                                        type="text"
-                                                        className="form-control form-control-lg text-center"
-                                                        maxLength="6"
-                                                        value={otp}
-                                                        onChange={e => setOtp(e.target.value)}
-                                                    />
+
+                                                    <ReactInputVerificationCode length={6} placeholder={"-"} onCompleted={(e) => handleSubmit(e)} />
                                                 </div>
                                             </div>
-                                            <div className="col-12 text-center mt-4">
+                                            {/* <div className="col-12 text-center mt-4">
                                                 <button type="submit" className="btn btn-primary text-uppercase py-2 fs-5 w-100" onClick={handleSubmit}>Verify my account</button>
-                                            </div>
+                                            </div> */}
                                         </form>
                                     </div>
                                 </div>
