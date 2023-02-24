@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Nav, Tab, TabContainer } from 'react-bootstrap';
 import Chart from "react-apexcharts";
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 function BalanceDetail() {
     const [options, setOptions] = useState({
@@ -187,6 +188,31 @@ function BalanceDetail() {
         labels: ['Cricket'],
     });
     const[seriesCircleChart,setSeriesCircleChart]=useState([70])
+
+
+const [details, setDetails] = useState([])
+
+//function for the fetching the user data
+const getUserDetails = () => {
+const token = window.localStorage.getItem('token')
+
+const headers = {
+    "x-auth-token": token
+}
+
+axios.get("http://167.99.86.45:3000/getsingleuser", {headers})
+.then(response=>{
+    console.log(response)
+    setDetails(response.data)
+}).catch(error=>{
+    console.error(error)
+})
+}
+
+useEffect(()=>{
+    getUserDetails()
+}, [])
+
     return (
         <div className='row g-3 mb-3 row-deck'>
             <div className="col-xl-12 col-xxl-7">
@@ -399,7 +425,7 @@ function BalanceDetail() {
                                         <div className="dot-green mx-2 my-2"></div>
                                         <div className="d-flex flex-column">
                                             <span className="flex-fill text-truncate">Phone Number</span>
-                                            <span>74****57</span>
+                                            <span>{details.phone}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -410,7 +436,7 @@ function BalanceDetail() {
                                         <div className="dot-green mx-2 my-2"></div>
                                         <div className="d-flex flex-column">
                                             <span className="flex-fill text-truncate">Email Address </span>
-                                            <span>ni***@gmail.com</span>
+                                            <span>{details.email}</span>
                                         </div>
                                     </div>
                                 </div>

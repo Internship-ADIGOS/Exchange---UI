@@ -58,7 +58,7 @@ function Signin() {
 
             //store the email to the local storage 
             window.localStorage.setItem("email", email)
-            if(response.data.success === true){
+            if(response.data.status === 1){
                 if(response.data.emailstatus === 1){
                     navigate(process.env.PUBLIC_URL + "/verification")
                 }else{

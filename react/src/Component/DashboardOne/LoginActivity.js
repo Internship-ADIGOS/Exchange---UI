@@ -1,7 +1,28 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect } from "react";
+import { useState } from "react";
+
 import { Nav, Tab } from "react-bootstrap";
 
 function LoginActivity() {
+
+    const [log, setLog] = useState([])
+
+    //function for fetching the last 5 details of the log 
+    function fetchLog(){
+
+        const header = {
+            "x-auth-token": window.localStorage.getItem("token")
+        }
+        axios.post("http://167.99.86.45:3000/get_user_data", {header}).then(response => {
+          console.log(response.data)
+          setLog(response.data)
+        })
+    }
+
+    useEffect(()=>{
+     fetchLog()
+    }, [])
     return (
         <div className="col-xl-8 col-xxl-7">
             <div className="card">
@@ -76,7 +97,9 @@ function LoginActivity() {
                             </Tab.Pane>
                             <Tab.Pane className="tab-pane fade  show" id="Devices" eventKey='second'>
                                 <ul className="list-unstyled list mb-0">
-                                    <li className="d-flex align-items-center py-2">
+                                    {
+                                   log.map((data, index) => {
+                                        <li className="d-flex align-items-center py-2" key={index}>
                                         <div className="avatar rounded no-thumbnail chart-text-color1"><i className="fa fa-chrome" aria-hidden="true"></i></div>
                                         <div className="flex-fill ms-3">
                                             <div className="h6 mb-0">Chrome V94.0.4606.61 (Windows)</div>
@@ -86,7 +109,9 @@ function LoginActivity() {
                                             <span className="d-block text-end">122.170.109.22</span>
                                             <span className="text-muted d-block small">2021-09-30 11:00:52</span>
                                         </div>
-                                    </li>
+                                        </li>
+                                   })
+                                    }
                                     <li className="d-flex align-items-center py-2">
                                         <div className="avatar rounded no-thumbnail chart-text-color2"><i className="fa fa-mobile" aria-hidden="true"></i></div>
                                         <div className="flex-fill ms-3">

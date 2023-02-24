@@ -10,6 +10,7 @@ function UserDetailcard() {
 
     //function for the fetching the user data
     const getUserDetails = () =>{
+        
         const token = window.localStorage.getItem('token')
 
         const headers = {

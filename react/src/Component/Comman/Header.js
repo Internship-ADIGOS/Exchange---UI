@@ -22,6 +22,8 @@ function Header(props) {
     const [collapsebig, setCollapsebig] = useState(false);
     const [sidebarMini, setSidebarMini] = useState(false);
     const [data, setData] = useState([])
+
+
     const closeCommanSidebar = () => {
         var sidebar = document.getElementById('commansidebar')
         if (sidebar) {
@@ -34,7 +36,7 @@ function Header(props) {
     }
 
     function handleRemove(){
-        window.localStorage.removeItem('token')
+        window.localStorage.clear()
     }
 
     //function for the fetching the user data

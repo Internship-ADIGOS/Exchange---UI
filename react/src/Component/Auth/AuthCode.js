@@ -14,10 +14,14 @@ const AuthCode = () => {
     code: e
   }).then(response => {
     //storing the auth token into the localstorage
+    console.log(response)
     window.localStorage.setItem('token', response.data.token)
+
     //navigating to the homepage
     navigate(process.env.PUBLIC_URL + "/")
-
+    
+  }).catch(err =>{
+    console.error(err);
   })
  }
  }
@@ -29,9 +33,8 @@ const AuthCode = () => {
       <div style={{ "display": 'flex', "justifyContent": "center" }}>
         <ReactInputVerificationCode length={6} placeholder={"-"} onCompleted={(e) => getVerified(e)} />
       </div>
-      <div style={{ "margin": "2vw", "display": 'flex', "justifyContent": "center" }}>
-        
-      </div>
+      <div style={{ "margin": "2vw", "display": 'flex', "justifyContent": "center" }}>      
+    </div>
     </div>
   )
 }

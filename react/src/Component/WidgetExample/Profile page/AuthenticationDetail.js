@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 
 function AuthenticationDetail() {
 
@@ -9,29 +9,26 @@ function AuthenticationDetail() {
         <div className="card auth-detailblock">
             <div className="card-header py-3 d-flex justify-content-between bg-transparent border-bottom-0">
                 <h6 className="mb-0 fw-bold ">Authentication Details</h6>
-                <button className="btn btn-primary" onClick={() => { setIsmodal(true) }}><i className="icofont-edit"></i></button>
+                {/* <button className="btn btn-primary" onClick={() => { setIsmodal(true) }}><i className="icofont-edit"></i></button> */}
             </div>
             <div className="card-body">
-                <div className="row g-3">
-                    <div className="col-12">
-                        <label className="form-label col-6 col-sm-5">User Name :</label>
-                        <span><strong>Adrian007</strong></span>
+                <div className="row g-3 mb-4">
+                    <div className="col-sm-6">
+                        <label htmlFor="taxtno111" className="form-label">Current Password</label>
+                        <input type="password" className="form-control" id="taxtno111" value="abcxyzabc" onChange={() => { }} />
                     </div>
-                    <div className="col-12">
-                        <label className="form-label col-6 col-sm-5">Login Password :</label>
-                        <span><strong>Abc*******</strong></span>
+                    <div className="col-sm-6">
+                        <label htmlFor="taxtno111" className="form-label">Password</label>
+                        <input type="password" className="form-control" id="taxtno111" value="abcxyzabc" onChange={() => { }} />
                     </div>
-                    <div className="col-12">
-                        <label className="form-label col-6 col-sm-5">Last Login:</label>
-                        <span><strong>128.456.89 (Apple) safari</strong></span>
-                    </div>
-                    <div className="col-12">
-                        <label className="form-label col-6 col-sm-5">Last Password change:</label>
-                        <span><strong>3 Month Ago</strong></span>
+                    <div className="col-sm-6">
+                        <label htmlFor="taxtno111" className="form-label">Confirm Password</label>
+                        <input type="password" className="form-control" id="taxtno111" value="abcxyzabc" onChange={() => { }} />
                     </div>
                 </div>
+                <Button>Update</Button>
             </div>
-            <Modal show={ismodal} onHide={() => { setIsmodal(false) }} >
+            {/* <Modal show={ismodal} onHide={() => { setIsmodal(false) }} >
                 <div className="modal-content">
                     <Modal.Header className="modal-header" closeButton>
                         <h5 className="modal-title  fw-bold" id="expeditLabel">Edit Authentication</h5>
@@ -62,7 +59,8 @@ function AuthenticationDetail() {
                     </div>
                 </div>
             </Modal>
-        </div>
+        */}
+        </div> 
     )
 }
 export default AuthenticationDetail;
