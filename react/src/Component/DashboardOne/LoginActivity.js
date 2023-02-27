@@ -97,11 +97,12 @@ function LoginActivity() {
                             </Tab.Pane>
                             <Tab.Pane className="tab-pane fade  show" id="Devices" eventKey='second'>
                                 <ul className="list-unstyled list mb-0">
-                                    {
+                                    {/* {
                                    log.map((data, index) => {
                                         <li className="d-flex align-items-center py-2" key={index}>
                                         <div className="avatar rounded no-thumbnail chart-text-color1"><i className="fa fa-chrome" aria-hidden="true"></i></div>
                                         <div className="flex-fill ms-3">
+                                            {}
                                             <div className="h6 mb-0">Chrome V94.0.4606.61 (Windows)</div>
                                             <small className="text-muted">Mumbai India</small>
                                         </div>
@@ -111,7 +112,7 @@ function LoginActivity() {
                                         </div>
                                         </li>
                                    })
-                                    }
+                                    } */}
                                     <li className="d-flex align-items-center py-2">
                                         <div className="avatar rounded no-thumbnail chart-text-color2"><i className="fa fa-mobile" aria-hidden="true"></i></div>
                                         <div className="flex-fill ms-3">
