@@ -9,10 +9,10 @@ function Kyc() {
 
   const [firstname, setFirstName] = useState("")
   const [lastname, setLastName] = useState("")
+  const [gender, setGender] = useState("")
   const [document1, setDocument1] = useState("")
   const [document2, setDocument2] = useState("")
   const [document3, setDocument3] = useState("")
-  const [gender, setGender] = useState("")
   const [address, setAddress] = useState("")
   const [verify, setVerify] = useState("")
   const [id_number, setIdNumber] = useState("")
@@ -28,7 +28,7 @@ function Kyc() {
           <Form.Label>Id Card Type</Form.Label>
           <Form.Select defaultValue="Passport">
             <option value={"passort"}>Passport1</option>
-            <option value={""}>Passport2</option>
+            <option value={""}>NID</option>
           </Form.Select>
         </Form.Group>
         <Form.Group as={Row} controlId="formGridEmail">
@@ -54,17 +54,19 @@ function Kyc() {
           <Col sm={10}>
             <Form.Check
               type="radio"
-              value={"male"}
+              value="0"
               label="Male"
               name="formHorizontalRadios"
               id="formHorizontalRadios1"
+              onChange={(e)=> setGender(e.target.value)}
               />
             <Form.Check
               type="radio"
-              value={"female"}
+              value="1"
               label="Female"
               name="formHorizontalRadios"
               id="formHorizontalRadios2"
+              onChange={(e)=> setGender(e.target.value)}
               />
           </Col>
         </Form.Group>
