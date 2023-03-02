@@ -1,6 +1,5 @@
 import React from 'react'
 import { Form } from 'react-bootstrap'
-import { MDBFile } from 'mdb-react-ui-kit'
 import axios from "axios"
 import { useState, useEffect} from 'react'
 
@@ -23,9 +22,15 @@ const BankDetails = () => {
    const token = window.localStorage.getItem("token")
   
   //form data 
-  const data = {
-    file1: file1,
+  const formdata = {
     method:"BANK",
+    file1: {
+      value:file1.files[0],
+      options:{
+        filename:"file1.png",
+        contentType: null
+      }
+    },
     acc_name: acc_name,
     acc_no: acc_no,
     branch_name: branch_name,
@@ -35,7 +40,19 @@ const BankDetails = () => {
     bank_name: bank_name
   }
 
-  axios.post("http://167.99.86.45:3000/bank_payout",data, {
+  // const formdata = new FormData()
+  // formdata.append("currency_symbol", "INR")
+  // // formdata.append("file1", file1.files[0], file1.name)
+  // formdata.append("method", "BANK")
+  // formdata.append("acc_name", acc_name)
+  // formdata.append("acc_no", acc_no)
+  // formdata.append("branch_name", branch_name)
+  // formdata.append("ifsc_code", ifsc)
+  // formdata.append("upi", upi)
+  // formdata.append("type", type)
+  // formdata.append("bank_name", bank_name)
+  
+  axios.post("http://167.99.86.45:3000/bank_payout", formdata, {
     headers:{
       "x-auth-token": token
     }
@@ -47,10 +64,9 @@ const BankDetails = () => {
   })
  }
 
- useEffect(()=>{
-   
- }, [])
-
+useEffect(()=>{
+   console.log(file1)
+}, [])
   return (
     <div>
     <form onSubmit={bank_verify}>
@@ -116,8 +132,9 @@ const BankDetails = () => {
           </Form.Select>
   </Form.Group>
  
-  <Form.Group  controlId="formGridEmail" className="mt-2 mb-2">
-          <MDBFile label='Passport image' id='customFile' value={file1} onChange={(e) => setFile1(e.target.value)} />
+  <Form.Group  controlId="formGridEmail" className="mt-4 mb-2">
+     <label></label>
+          <input  type="file" id='customFile' value={file1} onChange={(e) => setFile1(e.target.value)} />
    </Form.Group>
 
   <div class="form-check">

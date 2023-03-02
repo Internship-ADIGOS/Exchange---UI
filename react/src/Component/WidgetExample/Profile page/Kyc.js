@@ -17,6 +17,12 @@ function Kyc() {
   const [verify, setVerify] = useState("")
   const [id_number, setIdNumber] = useState("")
 
+  //function for calling the api
+  // function get_kyc(){
+  //   e.preventDefault()
+
+  // }
+
   return (
 
     <>
@@ -58,7 +64,6 @@ function Kyc() {
               label="Male"
               name="formHorizontalRadios"
               id="formHorizontalRadios1"
-              onChange={(e)=> setGender(e.target.value)}
               />
             <Form.Check
               type="radio"
@@ -66,7 +71,6 @@ function Kyc() {
               label="Female"
               name="formHorizontalRadios"
               id="formHorizontalRadios2"
-              onChange={(e)=> setGender(e.target.value)}
               />
           </Col>
         </Form.Group>
