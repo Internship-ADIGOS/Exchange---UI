@@ -24,6 +24,7 @@ const GoogleAuth = ({data}) => {
   
   //function for verifying the gauth code
   function verify_gauth(){
+    try{
       axios.post("http://167.99.86.45:3000/verify_gauth", {
           email: window.localStorage.getItem("email"),
           code: code
@@ -33,17 +34,31 @@ const GoogleAuth = ({data}) => {
 
          window.location.reload()
     })
+    }catch(err){
+      console.error(err);
+    }
+
   }
 
   //function for disabling the gauth
   function disable_gauth(){
-    const headers = {
-      "x-auth-token": window.localStorage.getItem("token")
-    }
-    axios.post("http://167.99.86.45:3000/disable_gauth", {headers}).then(response => {
+   const token = window.localStorage.getItem("token") //extracting the token from the localstorage 
+   const headers = {
+    "x-auth-token": token
+  }
+
+  try{
+    axios.post("http://167.99.86.45:3000/disable_gauth", 
+      {headers})
+      .then(response => {
       console.log(response.data)
-      setShow(true)
-    })
+      if(response.data.status === 1){
+        setShow(true)
+      }
+    }) 
+  }catch(err){
+    console.error(err);
+  }
   }
 
   function handleClose(){
