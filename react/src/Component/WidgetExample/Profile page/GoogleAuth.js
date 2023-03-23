@@ -11,6 +11,7 @@ const GoogleAuth = ({data}) => {
       const [visible, setVisible] = useState(false)
       const [show, setShow] = useState(false)
       
+      
 
      //function after onClick the button
     function enable_gauth() {
@@ -41,16 +42,13 @@ const GoogleAuth = ({data}) => {
   }
 
   //function for disabling the gauth
-  function disable_gauth(){
-   const token = window.localStorage.getItem("token") //extracting the token from the localstorage 
+   function disable_gauth(){
+   const token =  window.localStorage.getItem("token") //extracting the token from the localstorage 
    const headers = {
-    "x-auth-token": token
-  }
-
+    'x-auth-token': token
+   }
   try{
-    axios.post("http://167.99.86.45:3000/disable_gauth", 
-      {headers})
-      .then(response => {
+    axios.post("http://167.99.86.45:3000/disable_gauth", {headers}).then(response => {
       console.log(response.data)
       if(response.data.status === 1){
         setShow(true)
