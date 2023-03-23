@@ -37,9 +37,8 @@ const GoogleAuth = ({data}) => {
 
   //function for disabling the gauth
   function disable_gauth(){
-    const token = window.localStorage.getItem("token")
     const headers = {
-      "x-auth-token": token
+      "x-auth-token": window.localStorage.getItem("token")
     }
     axios.post("http://167.99.86.45:3000/disable_gauth", {headers}).then(response => {
       console.log(response.data)
