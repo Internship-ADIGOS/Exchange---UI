@@ -56,8 +56,8 @@ const GoogleAuth = ({data}) => {
                         Google 2 factor Authentication removed!
                         <button style={{ float: 'right' }} type="button" className="btn-close" data-dismiss="alert" aria-label="Close" onClick={handleClose}></button>
                     </Alert>}
-                  {data.googleauth === undefined && <Button className="col-lg-5 col-md-8 mt-4" onClick={enable_gauth}>Enable 2FA</Button>}
-                  {!(data.googleauth === undefined) && <Button className="col-lg-5 col-md-8 mt-4" onClick={disable_gauth} >Disable 2FA</Button>}
+                  {data.googleauth === null && <Button className="col-lg-5 col-md-8 mt-4" onClick={enable_gauth}>Enable 2FA</Button>}
+                  {!(data.googleauth === null) && <Button className="col-lg-5 col-md-8 mt-4" onClick={disable_gauth} >Disable 2FA</Button>}
                                   
                     <Modal show={visible} onHide={() => { setVisible(false) }}>
                         <Modal.Header>
