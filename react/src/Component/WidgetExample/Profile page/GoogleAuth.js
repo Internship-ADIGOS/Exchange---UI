@@ -48,10 +48,11 @@ const GoogleAuth = ({data}) => {
     'x-auth-token': token
    }
   try{
-    axios.post("http://167.99.86.45:3000/disable_gauth", {headers}).then(response => {
+    axios.post("http://167.99.86.45:3000/disable_gauth", {}, {headers}).then(response => {
       console.log(response.data)
       if(response.data.status === 1){
         setShow(true)
+        window.reload()
       }
     }) 
   }catch(err){
