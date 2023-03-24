@@ -2,6 +2,7 @@ import React from 'react'
 import { Form } from 'react-bootstrap'
 import axios from "axios"
 import { useState, useEffect} from 'react'
+import { useNavigate } from 'react-router'
 
 const BankDetails = () => {
 
@@ -12,37 +13,23 @@ const BankDetails = () => {
   const [ifsc, setIfsc] = useState("")
   const [upi, setUpi] = useState("")
   const [type, setType] = useState("")
-  const [file1, setFile1] = useState<File>([])
+  const [file1, setFile1] = useState([])
 
 
- function bank_verify(e){
+  const navigate = useNavigate();
+
+  
+  //function for the  api call
+  function bank_verify(e){
 
    e.preventDefault()
 
    const token = window.localStorage.getItem("token")
-  
-  //form data 
-  // const formdata = {
-  //   method:"BANK",
-  //   file1: {
-  //     value:file1.files[0],
-  //     options:{
-  //       filename:"file1.png",
-  //       contentType: null
-  //     }
-  //   },
-  //   acc_name: acc_name,
-  //   acc_no: acc_no,
-  //   branch_name: branch_name,
-  //   ifsc_code: ifsc,
-  //   upi: upi,
-  //   type: type,
-  //   bank_name: bank_name
-  // }
 
   const formdata = new FormData()
+  var imageFile = document.querySelector('#fileInput')
   formdata.append("currency_symbol", "INR")
-  formdata.append("file1", file1)
+  formdata.append("file1", imageFile.files[0])
   formdata.append("method", "BANK")
   formdata.append("acc_name", acc_name)
   formdata.append("acc_no", acc_no)
@@ -51,15 +38,16 @@ const BankDetails = () => {
   formdata.append("upi", upi)
   formdata.append("type", type)
   formdata.append("bank_name", bank_name)
+
+  const headers = {
+    "x-auth-token": token,
+    "Content-Type":"multipart/form-data"
+  }
   
-  axios.post("http://167.99.86.45:3000/bank_payout", formdata, {
-    headers:{
-      "x-auth-token": token,
-      "Content-Type":"multipart/form-data"
-    }
-  }).then(response => {
-    console.log("Hogya :D")
+  axios.post("http://167.99.86.45:3000/bank_payout", formdata, {headers}).then(response => {
     console.log(response)
+    navigate(process.env.PUBLIC_URL + "/");
+    
   }).catch(err => {
     console.error(err)
   })
