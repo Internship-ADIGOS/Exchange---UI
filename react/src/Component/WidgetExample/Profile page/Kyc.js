@@ -10,25 +10,39 @@ function Kyc() {
   const [firstname, setFirstName] = useState("")
   const [lastname, setLastName] = useState("")
   const [gender, setGender] = useState("")
-  const [document1, setDocument1] = useState("")
-  const [document2, setDocument2] = useState("")
-  const [document3, setDocument3] = useState("")
+  const [document1, setDocument1] = useState([])
+  const [document2, setDocument2] = useState([])
+  const [document3, setDocument3] = useState([])
   const [address, setAddress] = useState("")
   const [verify, setVerify] = useState("")
   const [id_number, setIdNumber] = useState("")
 
-  //function for calling the api
-  // function get_kyc(){
-  //   e.preventDefault()
+  //mkaing of the form data
+  var bodyFormData = new FormData(); 
 
-  // }
+  //adding fields to the form data
+  bodyFormData.append('first_name', firstname)
+  bodyFormData.append('last_name', lastname)
+  bodyFormData.append('document1', document1)
+  bodyFormData.append('document2', document2)
+  bodyFormData.append('document3', document3)
+  bodyFormData.append('gender', gender)
+  bodyFormData.append('gender', gender)
+
+  //function for calling the api
+  function get_kyc(){
+   
+
+
+
+  }
 
   return (
 
     <>
     <div className='card auth-detailblock mt-4 p-2'>
     <h3 >Kyc Details:</h3>
-    <Form className="mt-2 p-2">
+    <Form className="mt-2 p-2" onSubmit={get_kyc}>
       <Row className="mb-2 p-2">
         <Form.Group as={Row} controlId="formGridState">
           <Form.Label>Id Card Type</Form.Label>
@@ -78,15 +92,15 @@ function Kyc() {
 
       <Row className="mb-3 p-2">
       <Form.Group as={Row} controlId="formGridEmail" className='mb-2'>
-          <MDBFile label='Upload Selfie with id card' id='customFile' />
+          <MDBFile label='Upload Selfie with id card' id='customFile' value={document1} onChange={(e) => setDocument1(e.target.value)}/>
         </Form.Group>
 
-      <Form.Group as={Row} controlId="formGridEmail" className="mb-2">
+      <Form.Group as={Row} controlId="formGridEmail" className="mb-2" value={document2} onChange={(e) => setDocument2(e.target.value)}>
           <MDBFile label='Passport cover' id='customFile2' />
         </Form.Group>
 
       <Form.Group as={Row} controlId="formGridEmail" className="mb-2">
-          <MDBFile label='Passport inner' id='customFile3' />
+          <MDBFile label='Passport inner' id='customFile3' value={document3} onChange={(e) => setDocument3(e.target.value)}/>
         </Form.Group>
       </Row>
 
