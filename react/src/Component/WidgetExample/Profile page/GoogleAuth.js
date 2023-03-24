@@ -52,7 +52,7 @@ const GoogleAuth = ({data}) => {
       console.log(response.data)
       if(response.data.status === 1){
         setShow(true)
-        window.reload()
+        window.location.reload()
       }
     }) 
   }catch(err){
