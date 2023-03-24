@@ -55,6 +55,7 @@ import BootStrapIcon from './FontIcon/BootStrapIcon';
 import FontAwesomeIcon from './FontIcon/FontAwesomeIcon';
 import ToDoList from './Widget/ToDoList/ToDoList';
 import WalletPage from './WalletPage/WalletPage';
+import Trade from './WalletPage/Trade';
 import Reward from './Reward/Reward';
 import SecurityPage from './SecurityPage/SecurityPage';
 import Identification from './Identification/Identification';
@@ -62,6 +63,7 @@ import ReferalPage from './ReferalPage/ReferalPage';
 import { Alert } from 'react-bootstrap';
 import Verification from '../Component/Auth/Verification';
 import AuthCode from '../Component/Auth/AuthCode';
+
 
 
 function MainIndex(props) {
@@ -136,6 +138,7 @@ function MainIndex(props) {
                     <Route exact path={baseUrl + '/font-awesome-icon'} element={<FontAwesomeIcon />} />
                     <Route exact path={baseUrl + '/todo-list'} element={<ToDoList />} />
                     <Route exact path={baseUrl + '/wallet-page'} element={<WalletPage />} />
+                    <Route exact path={baseUrl + '/wallet'} element={<Trade />} />
                     <Route exact path={baseUrl + '/reward-page'} element={<Reward />} />
                     <Route exact path={baseUrl + '/security-page'} element={<SecurityPage />} />
                     <Route exact path={baseUrl + '/identification'} element={<Identification />} />

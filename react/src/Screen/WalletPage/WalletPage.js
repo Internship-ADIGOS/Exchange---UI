@@ -18,7 +18,7 @@ function WalletPage() {
                 <Transfer/>
             </div>
             <div className="row">
-<Transaction/>
+            <Transaction/>
             </div>
         </div>
     )
