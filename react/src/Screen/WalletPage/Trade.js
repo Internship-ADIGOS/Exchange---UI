@@ -3,18 +3,33 @@ import DataTable from 'react-data-table-component'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 
+const columns = [
+    {
+        id: 1,
+        title: "Coin Symbol/Name"
+    },
+    {
+        id: 3,
+        title: "Available balance"
+    },
+    {
+        id: 2,
+        title: "In Trade balance"
+    },
+]
+
 
 const Trade = () => {
 
     const [info, setInfo] = useState([]);
 
-    //function for calling the api
+    // function for calling the api
     function get_coins() {
 
         const headers = {
             "x-auth-token": window.localStorage.getItem("token")
         }
-        axios.get("http://167.99.86.45:3000/currency_symbols", { headers }).then(response => {
+        axios.post("http://167.99.86.45:3000/get_wallet", { headers }).then(response => {
             console.log(response)
             setInfo(response.data)
         }).catch(err => {
@@ -42,35 +57,33 @@ const Trade = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="row">
-                            {info.map(data => {
-                                <div className="col-sm-12">
-                             {/* <DataTable
-                                title={}
-                                columns={}
-                                data={}
-                                defaultSortField="title"
-                                selectableRows={false}
-                                highlightOnHover={true}
-                               />  */}
-                                </div>
-                            })
-
-                            }
-                        </div>
-                        <div className="row mt-3 ">
-                            <div className="col-sm-12 col-md-5" style={{ float: 'left' }}>
-                                <div className="dataTables_info" id="myDataTable_info" role="status" aria-live="polite">Showing 1 to 7 of 7 entries</div>
-                            </div>
-                            <div className="col-sm-12 col-md-7 " >
-                                <div className="dataTables_paginate paging_simple_numbers" id="myDataTable_paginate" style={{ float: 'right' }}>
-                                    <ul className="pagination">
-                                        <li className="paginate_button page-item previous disabled" id="myDataTable_previous"><a href="#!" className="page-link">Previous</a></li>
-                                        <li className="paginate_button page-item active"><a href="#!" className="page-link">1</a></li>
-                                        <li className="paginate_button page-item next disabled" id="myDataTable_next"><a href="#!" className="page-link">Next</a></li>
-                                    </ul>
-                                </div>
-                            </div>
+                        <div className="data">
+                            <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Coin/Symbol Name</th>
+                                            <th scope="col">Available balance</th>
+                                            <th scope="col">In trade balance</th>
+                                            <th scope="col">Fund wallet</th>
+                                            <th scope="col">Share wallet</th>
+                                            <th scope="col">Total balance</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                  {info.map((data, key) => {
+                                        <tr id={key}>
+                                            <th scope="row">{key}</th>
+                                            <td>{data.symbol}</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                        </tr>
+                                  
+                                  })
+                                  } 
+                                    </tbody>
+                                </table>
                         </div>
                     </div>
                 </div>
