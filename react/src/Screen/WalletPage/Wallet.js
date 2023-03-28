@@ -19,19 +19,20 @@ const columns = [
 ]
 
 
-const Trade = () => {
+const Wallet = () => {
 
-    const [info, setInfo] = useState([]);
+    const [info, setInfo] = useState([])
 
     // function for calling the api
     function get_coins() {
 
+        const token = window.localStorage.getItem("token")
         const headers = {
-            "x-auth-token": window.localStorage.getItem("token")
+            "x-auth-token": token
         }
-        axios.post("http://167.99.86.45:3000/get_wallet", { headers }).then(response => {
-            console.log(response)
-            setInfo(response.data)
+        axios.post("http://167.99.86.45:3000/get_wallet", null, { headers }).then(response => {
+            console.log(response.data)
+            // setInfo(response.data)
         }).catch(err => {
             console.error(err);
         })
@@ -39,8 +40,8 @@ const Trade = () => {
 
     useEffect(() => {
         get_coins(); //calling the api 
+        // console.log(info)
     })
-
 
     return (
         <div className="col-xl-12">
@@ -59,31 +60,31 @@ const Trade = () => {
                         </div>
                         <div className="data">
                             <table class="table">
-                                    <thead>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Coin/Symbol Name</th>
+                                        <th scope="col">Available balance</th>
+                                        <th scope="col">In trade balance</th>
+                                        <th scope="col">Fund wallet</th>
+                                        <th scope="col">Share wallet</th>
+                                        <th scope="col">Total balance</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {info.map((item, index) => {
                                         <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Coin/Symbol Name</th>
-                                            <th scope="col">Available balance</th>
-                                            <th scope="col">In trade balance</th>
-                                            <th scope="col">Fund wallet</th>
-                                            <th scope="col">Share wallet</th>
-                                            <th scope="col">Total balance</th>
-                                            <th scope="col">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                  {info.map((data, key) => {
-                                        <tr id={key}>
-                                            <th scope="row">{key}</th>
-                                            <td>{data.symbol}</td>
-                                            <td>Otto</td>
+                                            <th scope="row">{index}</th>
+                                            <td>{item[i].symbol}{item[index].fullname}{item[index].image}</td>
+                                            <td>{}</td>
                                             <td>@mdo</td>
                                         </tr>
-                                  
-                                  })
-                                  } 
-                                    </tbody>
-                                </table>
+                                    })
+                                    }
+
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -92,4 +93,4 @@ const Trade = () => {
     )
 }
 
-export default Trade
+export default Wallet
