@@ -31,8 +31,8 @@ const Wallet = () => {
             "x-auth-token": token
         }
         axios.post("http://167.99.86.45:3000/get_wallet", null, { headers }).then(response => {
-            console.log(response.data)
-            // setInfo(response.data)
+            // console.log(response.data.data)
+            setInfo(response.data.data)
         }).catch(err => {
             console.error(err);
         })
@@ -40,7 +40,7 @@ const Wallet = () => {
 
     useEffect(() => {
         get_coins(); //calling the api 
-        // console.log(info)
+        console.log(info)
     })
 
     return (
@@ -76,11 +76,12 @@ const Wallet = () => {
                                     {info.map((item, index) => {
                                         <tr>
                                             <th scope="row">{index}</th>
-                                            <td>{item[i].symbol}{item[index].fullname}{item[index].image}</td>
+                                            <td>{item[index]}{item[index].fullname}{item[index].image}</td>
                                             <td>{}</td>
                                             <td>@mdo</td>
                                         </tr>
                                     })
+
                                     }
 
                                 </tbody>
