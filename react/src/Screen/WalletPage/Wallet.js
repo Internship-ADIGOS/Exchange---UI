@@ -40,7 +40,7 @@ const Wallet = () => {
 
     useEffect(() => {
         get_coins(); //calling the api 
-        console.log(info)
+        console.log(info[1])
     })
 
     return (
@@ -73,16 +73,15 @@ const Wallet = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {info.map((item, index) => {
+                                    {/* {info.map((item, index) => {
                                         <tr>
                                             <th scope="row">{index}</th>
-                                            <td>{item[index]}{item[index].fullname}{item[index].image}</td>
+                                            <td>{item[0]}{item[index].fullname}{item[0].image}</td>
                                             <td>{}</td>
                                             <td>@mdo</td>
                                         </tr>
                                     })
-
-                                    }
+                                    } */}
 
                                 </tbody>
                             </table>
