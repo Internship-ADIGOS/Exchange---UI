@@ -3,21 +3,6 @@ import DataTable from 'react-data-table-component'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 
-const columns = [
-    {
-        id: 1,
-        title: "Coin Symbol/Name"
-    },
-    {
-        id: 3,
-        title: "Available balance"
-    },
-    {
-        id: 2,
-        title: "In Trade balance"
-    },
-]
-
 
 const Wallet = () => {
 
@@ -40,7 +25,7 @@ const Wallet = () => {
 
     useEffect(() => {
         get_coins(); //calling the api 
-        console.log(info[1])
+        console.log(info)
     })
 
     return (
@@ -73,16 +58,72 @@ const Wallet = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {/* {info.map((item, index) => {
                                         <tr>
-                                            <th scope="row">{index}</th>
-                                            <td>{item[0]}{item[index].fullname}{item[0].image}</td>
-                                            <td>{}</td>
-                                            <td>@mdo</td>
+                                            <th scope="row">1</th>
+                                            <td>{info[0].image}{info[0].symbol}{info[0].full_name}</td>
+                                            <td></td>
+                                            <td></td>
                                         </tr>
-                                    })
-                                    } */}
-
+                                        <tr>
+                                            <th scope="row">2</th>
+                                            <td>{info[1].image}{info[1].symbol}{info[1].full_name}</td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">3</th>
+                                            <td>{info[2].image}{info[2].symbol}{info[2].full_name}</td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">4</th>
+                                            <td>{info[3].image}{info[3].symbol}{info[3].full_name}</td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">5</th>
+                                            <td>{info[4].image}{info[4].symbol}{info[4].full_name}</td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">6</th>
+                                            <td>{info[5].image}{info[5].symbol}{info[5].full_name}</td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">7</th>
+                                            <td>{info[6].image}{info[6].symbol}{info[6].full_name}</td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">8</th>
+                                            <td>{info[7].image}{info[7].symbol}{info[7].full_name}</td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">9</th>
+                                            <td>{info[8].image}{info[8].symbol}{info[8].full_name}</td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">10</th>
+                                            <td>{info[9].image}{info[9].symbol}{info[9].full_name}</td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">11</th>
+                                            <td>{info[10].image}{info[0].symbol}{info[0].full_name}</td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
                                 </tbody>
                             </table>
                         </div>
